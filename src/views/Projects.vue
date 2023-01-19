@@ -2,11 +2,15 @@
 import { reactive } from 'vue';
 import Card from '../components/Card.vue';
 import Modal from '../components/Modal.vue';
+
+//import images
+import Automoblox from '../assets/img/automoblox.jpg';
+
 // data used to create card instances
 const cardsList: { title: string, src: string, alt: string }[] = [
-  { title: "Title1", src: "src/assets/img/Automoblox.jpg", alt: "alttext" },
-  { title: "Title2", src: "src/assets/img/Automoblox.jpg", alt: "alttext" },
-  { title: "Title3", src: "src/assets/img/Automoblox.jpg", alt: "alttext" }
+  { title: "Title1", src: Automoblox, alt: "alttext" },
+  { title: "Title2", src: Automoblox, alt: "alttext" },
+  { title: "Title3", src: Automoblox, alt: "alttext" }
 ];
 
 // modal states
