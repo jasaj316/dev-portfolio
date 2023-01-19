@@ -3,38 +3,62 @@ import { onBeforeMount, watch } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import router from './router/index'
 
+//##ROUTING
 // get list of routes, assign path, name to each object
 const routesList: { path: string, name: string }[] = [];
+let routesListExcludeFirst: { path: string, name: string }[];
 onBeforeMount(() => {
   router.getRoutes().forEach((route) => {
     routesList.push({ path: route.path, name: String(route.name) });
   })
+  routesListExcludeFirst = routesList.slice(1);
 });
 
 // get current route when useRoute changes, change title to (title + | + current route)
 let curRoute: { name: any } = useRoute();
-let pageTitle: string;
 watch(curRoute, () => {
-  let pageChars: string[] = String(curRoute.name).split("");
-  let lowerChars: string = "";
-  for (let i = 1; i < pageChars.length; i++) {
-    lowerChars += pageChars[i];
-  }
-  document.title = document.title.split(" | ")[0] + " | " + pageChars[0].toUpperCase() + lowerChars;
+  document.title = document.title.split(" | ")[0] + " | " + curRoute.name.toUpperCase()[0] + curRoute.name.slice(1)
 });
+//##ROUTING
 
 </script>
 
-
 <template>
   <header>
-    <div class="wrapper">
-      <nav v-for="route in routesList">
-        <RouterLink :to="route.path">{{ route.name }}</RouterLink>
+    <div id="header-main">
+      <RouterLink :to="routesList[0].path">
+        <div id="buttonLogo" class="logo">
+          <div>
+            <img src="@/assets/img/icon.png" alt="Menu Button">
+          </div>
+          <div class="title-text">
+            <h1>Justin Smith</h1>
+            <h2>Front-end Web Dev</h2>
+          </div>
+        </div>
+      </RouterLink>
+      <nav>
+        <RouterLink v-for="(route) in routesListExcludeFirst" :to="route.path">
+          {{ route.name.toUpperCase()[0] + route.name.slice(1) }}
+        </RouterLink>
       </nav>
+      <div class="links">
+        <!-- Icons by https://fontawesome.com/v5.15/icons/ - License: https://fontawesome.com/license-->
+        <a href="https://github.com/jasaj316/">
+          <img id="github-button" src="@/assets/img/github-brands.svg" alt="Github">
+        </a>
+        <a href="https://www.linkedin.com/in/justin-a-smith-177b30ab/">
+          <img id="linkedin-button" src="@/assets/img/linkedin-in-brands.svg" alt="LinkedIn">
+        </a>
+      </div>
     </div>
   </header>
   <RouterView />
+  <footer>
+    <p>
+      Site Created by Justin Smith using Vue. Hosted on Github Pages.
+    </p>
+  </footer>
 </template>
 
 
@@ -43,7 +67,7 @@ watch(curRoute, () => {
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@600&display=swap');
 
-body {
+#app {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -77,8 +101,9 @@ h2 {
 }
 
 h3 {
-  color: #ff8800;
+  color: #ff9a00;
   font-size: 1.3rem;
+  font-weight: 600;
 }
 
 /* Header */
@@ -96,12 +121,16 @@ h3 {
   align-items: center;
 }
 
-#header-main>div:nth-of-type(1) {
-  margin: 2.5vw;
-  margin-right: calc(1.7rem - 0.2vw);
+#header-main a {
+  text-decoration: none;
 }
 
-#header-main h2 {
+#header-main a>div:nth-of-type(1) {
+  margin: 2.5vw;
+  margin-right: 1.6rem;
+}
+
+#header-main a h2 {
   font-weight: 200;
 }
 
@@ -216,7 +245,6 @@ footer p {
 /* Main */
 main {
   margin: auto;
-  padding-left: 1vw;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -238,190 +266,6 @@ main h3 {
 
 main p {
   font-size: 1.4rem;
-  /* max-width: 50vw; */
-}
-
-/* Article */
-article {
-  padding: 0.35rem 0rem;
-}
-
-/* Portfolio */
-#demo-reel {
-  width: 52vw;
-  height: 32.5vw;
-  border: 3px solid #00000000;
-}
-
-#items-one,
-#items-two {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-}
-
-/* cards */
-.card,
-.card-vid {
-  flex-direction: column;
-  align-items: center;
-  background: #1718217d;
-  border-radius: 0.1rem;
-  padding: 1vw;
-  display: flex;
-  margin-right: 1vw;
-  margin-bottom: 1vw;
-}
-
-.card-vid {
-  grid-column-start: span 2;
-}
-
-.card h3,
-.card-vid h3 {
-  margin-top: calc(1rem - 1vw);
-  margin-bottom: 1rem;
-  font-size: 1.05vw;
-}
-
-.card h3 span,
-.card-vid h3 span {
-  font-weight: lighter;
-}
-
-.card img {
-  width: 24vw;
-  height: auto;
-  border: 2px solid #00000000;
-  border-radius: 0.1rem;
-  transition: border 0.15s;
-  cursor: pointer;
-}
-
-.card img:hover {
-  border: 2px solid #ff8800;
-}
-
-/* Default hidden items */
-.hidden {
-  display: none !important;
-}
-
-/* Modal Images */
-.modal-bg {
-  position: fixed;
-  z-index: 2;
-  background-color: #040611bb;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  right: 0;
-}
-
-.modal-img {
-  height: 100vh;
-  align-self: flex-end;
-  width: auto;
-  cursor: zoom-in;
-}
-
-.modal-img-container {
-  display: flex;
-  position: fixed;
-  z-index: 3;
-  width: 100vw;
-  height: 100vh;
-  left: 0;
-  justify-content: center;
-}
-
-.modal-x {
-  user-select: none;
-  position: fixed;
-  z-index: 4;
-  color: #fff;
-  text-shadow: 0px 0px 8px #000, 0px 0px 36px #000;
-  text-align: center;
-  font-size: 3rem;
-  margin: 0;
-  top: -1rem;
-  right: 2rem;
-  font-weight: 900;
-  line-height: 8rem;
-  cursor: pointer;
-}
-
-/* Form */
-form {
-  margin: 0;
-  font-size: 1.3rem;
-}
-
-fieldset {
-  width: 60vw;
-  border: none;
-  display: flex;
-  flex-direction: column;
-}
-
-fieldset>* {
-  margin-bottom: 1rem;
-}
-
-input,
-textarea {
-  border: none;
-  background-color: #f0eee9;
-}
-
-input {
-  max-width: 40%;
-}
-
-textarea {
-  resize: vertical;
-  margin-bottom: 0.1rem;
-}
-
-.form-button {
-  text-decoration: none;
-  color: #040611;
-  background-color: #f0eee9;
-  width: 18%;
-  font-weight: 600;
-  text-align: center;
-  padding: 0.2rem;
-  border-radius: 0.1rem;
-  transition: background-color 0.15s;
-}
-
-.form-button:focus,
-.form-button:hover,
-.form-button:active {
-  background-color: #ff8800;
-}
-
-form p>i>span {
-  color: #ff8800;
-}
-
-/* About */
-.about {
-  display: flex;
-  flex-direction: column;
-  background: #1718217d;
-  border-radius: 0.1rem;
-  padding: 1vw;
-  margin-bottom: 1rem;
-}
-
-.about p {
-  font-size: 1.3rem;
-  margin-bottom: 0.2rem;
-  max-width: 60vw;
-}
-
-.about p:first-of-type {
-  margin-block-start: 0;
 }
 
 /* touch screen remove hovers */
@@ -435,57 +279,32 @@ form p>i>span {
     background-color: unset;
     font-weight: unset;
   }
-
-  .card img:hover {
-    border: none;
-  }
 }
 
 /* Media generals */
 @media only screen and (max-width: 890px) {
-
-  /* form */
-  fieldset {
-    width: 80vw;
-  }
-
-  /* grid */
-  #items-one,
-  #items-two {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* cards */
-  .card img {
-    width: 40vw;
-  }
-
-  #demo-reel {
-    width: 84.3vw;
-    height: 52.7vw;
-  }
-
-  .card h3 {
-    font-size: 1.5vw;
-  }
-
-  .card-vid h3 {
-    font-size: calc(.6rem + 1.2vw);
-  }
-
-  /* nav */
-
   nav a {
-    padding-left: calc(.6rem + 1.4vw);
-    padding-right: calc(.6rem + 1.4vw);
+    right: auto;
+    padding-left: calc(9vw - 2.6rem);
+    padding-right: calc(9vw - 2.6rem);
   }
 
-}
+  .links {
+    margin-left: auto;
+    margin-right: 2.8vw;
+  }
 
+  .logo img {
+    width: calc(4vw + 50px);
+    margin-top: 0.2rem;
+    padding: 0.1rem;
+    height: auto;
+  }
+}
 
 /* Small screens */
 @media only screen and (max-width: 710px) {
-  body {
+  body #app {
     overflow-x: hidden !important;
   }
 
@@ -494,14 +313,9 @@ form p>i>span {
     overflow-x: hidden !important;
   }
 
-  .modal-img {
-    margin: auto;
-    height: auto;
-    width: 100vw;
-  }
-
-  #header-main>div:nth-of-type(1) {
-    margin: auto;
+  #header-main a>div:nth-of-type(1) {
+    margin: calc(6vw - 0.2rem);
+    margin-right: 0;
   }
 
   .title-text {
@@ -514,22 +328,15 @@ form p>i>span {
 
   nav a {
     right: auto;
-    padding-left: 6vw;
-    padding-right: 6vw;
-  }
-
-  input {
-    max-width: 40%;
+    padding-left: calc(12vw - 2rem);
+    padding-right: calc(12vw - 2rem);
   }
 
   .links {
     margin-left: auto;
-    margin-right: auto;
+    margin-right: calc(5vw - 0.2rem);
   }
 
-  .about>p {
-    max-width: 80vw;
-  }
 }
 
 /* Tiny screens */
@@ -547,20 +354,21 @@ form p>i>span {
 
   nav a {
     right: auto;
-    padding-left: calc(6vw - 0.5rem);
-    padding-right: calc(6vw - 0.5rem);
+    padding-left: 3vw;
+    padding-right: 3vw;
   }
 
-  input {
-    max-width: 60%;
+  #header-main a>div:nth-of-type(1) {
+    margin: calc(6vw - 0.6rem);
+    margin-right: 0;
   }
 
-  .form-button {
-    width: 28%;
+  .logo img {
+    width: calc(3vw + 50px);
+    margin-top: 0.2rem;
+    padding: 0.1rem;
+    height: auto;
   }
 
-  .about>p {
-    max-width: 90vw;
-  }
 }
 </style>
