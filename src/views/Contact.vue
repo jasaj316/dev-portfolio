@@ -100,6 +100,7 @@ textarea {
 }
 
 .form-button {
+  user-select: none;
   text-decoration: none;
   color: #040611;
   background-color: #f0eee9;

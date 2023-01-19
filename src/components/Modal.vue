@@ -54,6 +54,7 @@ figcaption {
 }
 
 .modal-img {
+  user-select: none;
   height: 80vh;
   width: auto;
 }

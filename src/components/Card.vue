@@ -35,6 +35,7 @@ figcaption {
 }
 
 img {
+  user-select: none;
   width: 24vw;
   height: auto;
   border: 2px solid #00000000;
