@@ -10,7 +10,7 @@ import TypeAhead from '../assets/img/typeAhead.jpg';
 
 // data used to create card instances
 const cardsList: { title: string, src: string, alt: string }[] = [
-  { title: "'Guess The Flag' Game with Map", src: Flag, alt: "Click on a map to guess where a flag comes from" },
+  { title: "'Guess The Flag' Game with Map API", src: Flag, alt: "Click on a map to guess where a flag comes from" },
   { title: "Dynamic Search Filter in VanillaJS", src: TypeAhead, alt: "List of cities and states, filtered using a search box" },
   { title: "Bootstrap Site for Automoblox", src: Automoblox, alt: "A site that fully uses bootstrap classes + carousel" }
 ];
@@ -49,9 +49,7 @@ function modalHandler(title: string = "", src: string = "", alt: string = "") {
     </div>
     <div class="portfolio">
       <article id="portfolio-items">
-        <div class="cards" v-for="card in cardsList">
-          <Card @imgClicked="(title, src, alt) => modalHandler(title, src, alt)" :="card" />
-        </div>
+        <Card v-for="card in cardsList" @imgClicked="(title, src, alt) => modalHandler(title, src, alt)" :="card" />
       </article>
     </div>
     <Modal @imgClicked="modalHandler" :="state" />
@@ -69,7 +67,7 @@ article {
 }
 
 /* Media generals */
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 1090px) {
 
   /* grid */
   #portfolio-items {

@@ -148,11 +148,11 @@ h3 {
 
 .title-text h1 {
   user-select: text;
-  font-size: 2.35rem;
+  font-size: 2.25rem;
 }
 
 .title-text h2 {
-  font-size: 1.22rem;
+  font-size: 1.18rem;
 }
 
 .logo img {

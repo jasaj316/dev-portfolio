@@ -31,21 +31,22 @@ const props = defineProps<{ modalVis: string, title: string, src: string, alt: s
   height: 100%;
   left: 0;
   right: 0;
+  top: 0;
   cursor: pointer;
 }
 
 figcaption {
   text-align: center;
-  margin-top: 1.4rem;
+  margin-top: 1rem;
   color: #ff9a00;
   font-size: 1.6rem;
   font-weight: 600;
 }
 
 .caption-bg {
-  background-image: linear-gradient(to right, #09091a22, #02020f, #09091a22);
-  width: 100vw;
-  height: 10vh;
+  background-image: linear-gradient(to right, #09091a77, #02020f, #09091a77);
+  width: 100%;
+  height: 60px;
   margin-top: auto;
 }
 
@@ -62,19 +63,29 @@ figcaption {
 .modal-img {
   margin-top: auto;
   user-select: none;
-  height: 90vh;
+  height: 80vh;
   width: auto;
 }
 
-
-
-
 /* Small screens */
-@media only screen and (max-width: 710px) {
+@media only screen and (max-width: 580px) {
+
+  figcaption {
+    text-align: center;
+    margin-top: 1rem;
+    color: #ff9a00;
+    font-size: 5vw;
+    font-weight: 600;
+  }
+
+  .caption-bg {
+    margin: 0;
+  }
+
   .modal-img {
-    margin: auto;
+    margin: 0;
     height: auto;
-    width: 100vw;
+    width: 100%;
   }
 }
 </style>

@@ -19,18 +19,23 @@ const props = defineProps<{ title: string, src: string, alt: string }>();
   align-items: center;
   background: #1718217d;
   border-radius: 0.1rem;
+  width: 25vw;
   padding: 1vw;
   display: flex;
-  margin-right: 1vw;
-  margin-bottom: 1vw;
+  margin-right: 2vw;
+  margin-bottom: 2vw;
+}
+
+figure {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
 }
 
 figcaption {
   margin-top: calc(1rem - 1vw);
   margin-bottom: 1rem;
-  font-size: 1.05vw;
+  font-size: 1.1vw;
   color: #ff9a00;
-  font-size: 1.3rem;
   font-weight: 600;
 }
 
@@ -56,13 +61,25 @@ img:hover {
 }
 
 /* Media generals */
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 1090px) {
+  .card {
+    width: unset;
+  }
+
   img {
     width: 40vw;
   }
 
   figcaption {
-    font-size: 1.5vw;
+    font-size: 1.6vw;
+  }
+
+}
+
+@media only screen and (max-width: 580px) {
+  figcaption {
+    visibility: hidden;
+    margin: 0;
   }
 
 }

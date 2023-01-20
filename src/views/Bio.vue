@@ -4,7 +4,6 @@
       <h1>About Me</h1>
       <h3>A short biography</h3>
     </div>
-
     <article class="about">
       <p>
         &nbsp;&nbsp;I grew up in Muskoka, ON, and after graduating high school,
@@ -26,7 +25,7 @@
         The program covered client-side web technologies such as HTML, CSS, and Vanilla JS,
         design skills such as UI, UX, and graphic design, and server-side technologies such as PHP,
         relational database management using MySQL, and NoSQL MongoDB.
-        We've learned the Javascript frameworks Vue and React, as well as learning other small libraries.
+        I've learned the Javascript frameworks Vue and React, as well as various small libraries.
       </p>
       <p> My other passions (in no particular order) include:
         <br><br>
