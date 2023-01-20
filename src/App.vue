@@ -33,7 +33,7 @@ watch(curRoute, () => {
           </div>
           <div class="title-text">
             <h1>Justin Smith</h1>
-            <h2>Front-end Web Dev</h2>
+            <h2>Front-End Web Developer</h2>
           </div>
         </div>
       </RouterLink>
@@ -113,7 +113,7 @@ h3 {
   z-index: 1;
   width: 100%;
   height: 125px;
-  background-image: url("../images/bg.png");
+  background-image: url("./assets/img/bg.png");
   background-color: #171820;
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
@@ -148,11 +148,11 @@ h3 {
 
 .title-text h1 {
   user-select: text;
-  font-size: 2.2rem;
+  font-size: 2.35rem;
 }
 
 .title-text h2 {
-  font-size: 1.42rem;
+  font-size: 1.22rem;
 }
 
 .logo img {

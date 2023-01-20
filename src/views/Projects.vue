@@ -5,12 +5,14 @@ import Modal from '../components/Modal.vue';
 
 //import images
 import Automoblox from '../assets/img/automoblox.jpg';
+import Flag from '../assets/img/flag.jpg';
+import TypeAhead from '../assets/img/typeAhead.jpg';
 
 // data used to create card instances
 const cardsList: { title: string, src: string, alt: string }[] = [
-  { title: "Title1", src: Automoblox, alt: "alttext" },
-  { title: "Title2", src: Automoblox, alt: "alttext" },
-  { title: "Title3", src: Automoblox, alt: "alttext" }
+  { title: "'Guess The Flag' Game with Map", src: Flag, alt: "Click on a map to guess where a flag comes from" },
+  { title: "Dynamic Search Filter in VanillaJS", src: TypeAhead, alt: "List of cities and states, filtered using a search box" },
+  { title: "Bootstrap Site for Automoblox", src: Automoblox, alt: "A site that fully uses bootstrap classes + carousel" }
 ];
 
 // modal states

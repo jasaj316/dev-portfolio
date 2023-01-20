@@ -6,27 +6,38 @@
     </div>
 
     <article class="about">
-      <p> Lorem Ipsum este pur şi simplu o machetă pentru text a industriei tipografice.
-      </p>
-      <p>a fost macheta standard a industriei încă din secolul al XVI-lea,
-        când un tipograf anonim a luat o planşetă de litere şi le-a amestecat pentru.
+      <p>
+        &nbsp;&nbsp;I grew up in Muskoka, ON, and after graduating high school,
+        I studied Game Development at Durham College. This allowed me to obtain a
+        Texture Artist position at Guru Studio in Toronto, to work on the television series 'Paw Patrol'.
       </p>
       <p>
-        a crea o carte demonstrativă pentru literele respective. Nu doar că a supravieţuit
-        timp de cinci secole, dar şi a facut saltul în tipografia electronică practic neschimbată.
-        A fost popularizată în anii '60 odată
+        &nbsp;&nbsp;Working in a large team allowed me to hone my communication skills, helping me
+        collaborate, troubleshoot, and share solutions among team members.
+        Deadlines were often very tight,
+        which required me limit the amount of time spent on individual tasks in order to complete assignments on
+        schedule.
+        I left that field due to the fact that creating 3d Art requires very little
+        problem-solving, which I enjoy greatly.
       </p>
-      <p> făcându-l să arate ca o engleză citibilă:
-        <br /><br />
-        - demonstrativă <br />
-        - pentru <br />
-        - tipografia <br />
-        - făcând-o<br />
-        - căutând<br />
-        - Bonorum <br />
-        - odată
+      <p>
+        &nbsp;&nbsp;I've recently graduated from Georgian College's 'Interactive Media Design-Web' program, recieving
+        Honours.
+        The program covered client-side web technologies such as HTML, CSS, and Vanilla JS,
+        design skills such as UI, UX, and graphic design, and server-side technologies such as PHP,
+        relational database management using MySQL, and NoSQL MongoDB.
+        We've learned the Javascript frameworks Vue and React, as well as learning other small libraries.
       </p>
-      <p>Nimeni nu iubeşte durerea, nimeni nu o caută sau vrea să o aibă!</p>
+      <p> My other passions (in no particular order) include:
+        <br><br>
+        -&nbsp;Cooking<br>
+        -&nbsp;Spicy food<br>
+        -&nbsp;Composing electronic music<br>
+        -&nbsp;Cross-country road trips<br>
+        -&nbsp;Cats<br>
+        -&nbsp;Typography
+      </p>
+      <p>Thank you for taking the time to review my biography. I hope to hear from you soon!</p>
     </article>
   </main>
 </template>

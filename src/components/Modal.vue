@@ -9,8 +9,9 @@ const props = defineProps<{ modalVis: string, title: string, src: string, alt: s
   <div id="modal-bg" @click="$emit('imgClicked')" :class="props.modalVis">
     <figure class="modal-container">
       <img class="modal-img" :src="props.src" :alt="props.alt" />
-      <div class="caption-bg"></div>
-      <figcaption>{{ props.title }}</figcaption>
+      <div class="caption-bg">
+        <figcaption>{{ props.title }}</figcaption>
+      </div>
     </figure>
   </div>
 </template>
@@ -34,28 +35,34 @@ const props = defineProps<{ modalVis: string, title: string, src: string, alt: s
 }
 
 figcaption {
-  margin-top: calc(1rem - 1vw);
-  margin-bottom: 1rem;
-  font-size: 1.05vw;
+  text-align: center;
+  margin-top: 1.4rem;
   color: #ff9a00;
-  font-size: 1.3rem;
+  font-size: 1.6rem;
   font-weight: 600;
 }
 
-.caption-bg {}
+.caption-bg {
+  background-image: linear-gradient(to right, #09091a22, #02020f, #09091a22);
+  width: 100vw;
+  height: 10vh;
+  margin-top: auto;
+}
 
 .modal-container {
+  margin: 0;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
   z-index: 3;
 }
 
 .modal-img {
+  margin-top: auto;
   user-select: none;
-  height: 80vh;
+  height: 90vh;
   width: auto;
 }
 
