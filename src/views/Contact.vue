@@ -74,6 +74,7 @@ form {
 }
 
 fieldset {
+  margin: auto;
   width: 60vw;
   border: none;
   display: flex;
@@ -86,8 +87,16 @@ fieldset>* {
 
 input,
 textarea {
-  border: none;
+  outline: none;
+  border: solid 3px #f0eee9;
+  border-radius: 3px;
   background-color: #f0eee9;
+  transition: border 0.15s;
+}
+
+input:focus,
+textarea:focus {
+  border: solid 3px #fab00c;
 }
 
 input {
@@ -108,18 +117,21 @@ textarea {
   font-weight: 600;
   text-align: center;
   padding: 0.2rem;
-  border-radius: 0.1rem;
-  transition: background-color 0.15s;
+  border-radius: 3px;
+  border-style: solid;
+  border-width: 3px;
+  border-color: transparent;
+  transition: border-color 0.15s;
 }
 
 .form-button:focus,
 .form-button:hover,
 .form-button:active {
-  background-color: #ff9a00;
+  border-color: #f1a500;
 }
 
 form p>i>span {
-  color: #ff9a00;
+  color: #f1a500;
 }
 
 fieldset>p {
@@ -131,8 +143,6 @@ fieldset>p span.clickable {
 }
 
 @media only screen and (max-width: 890px) {
-
-  /* form */
   fieldset {
     width: 80vw;
   }
@@ -141,17 +151,28 @@ fieldset>p span.clickable {
 
 /* Small screens */
 @media only screen and (max-width: 710px) {
-
   input {
     max-width: 40%;
   }
 }
 
 /* Tiny screens */
-@media only screen and (max-width: 400px) {
+@media only screen and (max-width: 570px) {
+
+  fieldset {
+    align-items: center;
+  }
 
   input {
     max-width: 60%;
+  }
+
+  textarea {
+    width: 88%;
+  }
+
+  fieldset>p {
+    text-align: center;
   }
 
   .form-button {

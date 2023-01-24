@@ -1,17 +1,21 @@
 <script setup lang="ts">
-import { onBeforeMount, watch } from 'vue';
+import { onBeforeMount, watch, ref } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router'
-import router from './router/index'
+import router from '@/router/index'
+// import images
+import Icon from '@/assets/img/icon.png';
+import IconBorder from '@/assets/img/icon-border.png';
+import ExternalLinkIcon from '@/assets/img/external-64.svg';
 
 //##ROUTING
 // get list of routes, assign path, name to each object
 const routesList: { path: string, name: string }[] = [];
-let routesListExcludeFirst: { path: string, name: string }[];
+let routesListAfterFirst: { path: string, name: string }[];
 onBeforeMount(() => {
   router.getRoutes().forEach((route) => {
     routesList.push({ path: route.path, name: String(route.name) });
   })
-  routesListExcludeFirst = routesList.slice(1);
+  routesListAfterFirst = routesList.slice(1);
 });
 
 // get current route when useRoute changes, change title to (title + | + current route)
@@ -21,15 +25,21 @@ watch(curRoute, () => {
 });
 //##ROUTING
 
+// switching icon src on hover
+let iconRef = ref<string>(Icon);
+function handleHover(e: any) {
+  iconRef.value = e.type === "mouseenter" ? IconBorder : Icon;
+}
+
 </script>
 
 <template>
   <header>
     <div id="header-main">
       <RouterLink :to="routesList[0].path">
-        <div id="buttonLogo" class="logo">
+        <div @mouseenter="e => handleHover(e)" @mouseleave="e => handleHover(e)" id="buttonLogo" class="logo">
           <div>
-            <img src="@/assets/img/icon.png" alt="Menu Button">
+            <img :src="iconRef" alt="Menu Button">
           </div>
           <div class="title-text">
             <h1>Justin Smith</h1>
@@ -38,7 +48,7 @@ watch(curRoute, () => {
         </div>
       </RouterLink>
       <nav>
-        <RouterLink v-for="(route) in routesListExcludeFirst" :to="route.path">
+        <RouterLink v-for="(route) in routesListAfterFirst" :to="route.path">
           {{ route.name.toUpperCase()[0] + route.name.slice(1) }}
         </RouterLink>
       </nav>
@@ -56,8 +66,13 @@ watch(curRoute, () => {
   <RouterView />
   <footer>
     <p>
-      Site Created by Justin Smith using Vue. Hosted on Github Pages.
+      Site Created by Justin Smith using <span>Vue</span>. Hosted on
+      <a href="https://github.com/jasaj316/dev-portfolio">
+        Github Pages
+        <img :src="ExternalLinkIcon" alt="Link to github pages" />
+      </a>
     </p>
+
   </footer>
 </template>
 
@@ -73,10 +88,14 @@ watch(curRoute, () => {
   justify-content: flex-start;
   min-height: 100vh;
   font-size: 16px;
-  background-image: linear-gradient(#030614, #09091a);
+  background-image: linear-gradient(#000 10%, #030614 20%, #09091a 100%);
   color: #f0eee9;
   font-family: "Inter", Helvetica, Arial, sans-serif;
   letter-spacing: 0.002rem;
+}
+
+#app *::selection {
+  background-color: #547cd188;
 }
 
 h1,
@@ -101,7 +120,7 @@ h2 {
 }
 
 h3 {
-  color: #ff9a00;
+  color: #f1a500;
   font-size: 1.3rem;
   font-weight: 600;
 }
@@ -113,8 +132,9 @@ h3 {
   z-index: 1;
   width: 100%;
   height: 125px;
-  background-image: url("./assets/img/bg.png");
-  background-color: #171820;
+  background-image: linear-gradient(#171820 0%, #1a1b24 100%);
+  background-image: url("./assets/img/bg.png"), linear-gradient(#171820 70%, #1a1b26 100%);
+  background-position: center;
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
   flex-direction: row;
@@ -123,11 +143,12 @@ h3 {
 
 #header-main a {
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 #header-main a>div:nth-of-type(1) {
   margin: 2.5vw;
-  margin-right: 1.6rem;
+  margin-right: 1.5rem;
 }
 
 #header-main a h2 {
@@ -142,24 +163,30 @@ h3 {
 
 .logo .title-text {
   color: #f0eee9;
-
-  margin-left: 1rem
+  margin-left: 0.9rem
 }
 
 .title-text h1 {
   user-select: text;
-  font-size: 2.25rem;
+  font-size: 2.2rem;
 }
 
 .title-text h2 {
-  font-size: 1.18rem;
+  font-size: 1.14rem;
 }
 
 .logo img {
   width: calc(2vw + 70px);
   margin-top: 0.2rem;
-  padding: 0.1rem;
   height: auto;
+}
+
+.logo:hover .title-text h1 {
+  color: #f7aa05;
+}
+
+.logo:hover .title-text h2 {
+  color: #f0eee9;
 }
 
 .logo {
@@ -168,10 +195,6 @@ h3 {
 
 .logo:hover {
   cursor: pointer;
-}
-
-.logo:hover img {
-  filter: grayscale(100%) brightness(150%);
 }
 
 .links {
@@ -208,8 +231,9 @@ nav {
 nav a {
   text-align: center;
   font-size: calc(1.2rem + .6vw);
-  padding: 3.6rem;
-  border-left: 2px solid #f0eee9;
+  padding-left: calc(2vw + 2rem);
+  padding-right: calc(2vw + 2rem);
+  border-left: 3px solid #f0eee9;
   padding-top: 22px;
   padding-bottom: 22px;
   color: unset;
@@ -218,29 +242,56 @@ nav a {
 }
 
 nav a:last-of-type {
-  border-right: 2px solid #f0eee9;
+  border-right: 3px solid #f0eee9;
 }
 
 nav a:hover {
   cursor: pointer;
   color: #151515;
-  background-color: #ffffff;
+  background-color: #f0eee9;
   font-weight: bolder;
 }
 
 /* Footer */
 footer {
   text-align: center;
-  background: #1718217d;
+  background: #16171f;
+  background-image: linear-gradient(#12131b 0%, #10111c 50%);
 }
 
 footer p {
+
   font-family: 'Inter', sans-serif;
   color: #f0eee9c9;
   font-size: 0.9rem;
   letter-spacing: -0.016rem;
 }
 
+footer p span {
+  color: #89d443;
+}
+
+footer a {
+  text-decoration: underline;
+  color: #fab00c;
+  filter: sepia(0%) brightness(100%);
+
+}
+
+footer a:hover {
+  filter: hue-rotate(158deg) brightness(135%) saturate(1.2%);
+}
+
+footer a img {
+  height: 1rem;
+  width: auto;
+  vertical-align: middle;
+}
+
+/* Modal is on */
+body:has(main.vis) {
+  overflow: hidden;
+}
 
 /* Main */
 main {
@@ -269,11 +320,7 @@ main p {
 }
 
 /* touch screen remove hovers */
-@media (hover: none) {
-  .logo:hover img {
-    filter: grayscale(0%) brightness(100%);
-  }
-
+@media (hover:none) {
   nav a:hover {
     color: unset;
     background-color: unset;
@@ -285,13 +332,12 @@ main p {
 @media only screen and (max-width: 890px) {
   nav a {
     right: auto;
-    padding-left: calc(9vw - 2.6rem);
-    padding-right: calc(9vw - 2.6rem);
+    padding-left: calc(9vw - 2.8rem);
+    padding-right: calc(9vw - 2.8rem);
   }
 
   .links {
     margin-left: auto;
-    margin-right: 2.8vw;
   }
 
   .logo img {
@@ -334,13 +380,13 @@ main p {
 
   .links {
     margin-left: auto;
-    margin-right: calc(5vw - 0.2rem);
+    margin-right: calc(5vw - 0.1rem);
   }
 
 }
 
-/* Tiny screens */
-@media only screen and (max-width: 400px) {
+/* Smaller screens */
+@media only screen and (max-width: 570px) {
   main {
     align-items: center;
   }
@@ -351,7 +397,10 @@ main p {
     text-align: center;
     padding: 0rem 1rem;
   }
+}
 
+/* Tiny screens */
+@media only screen and (max-width: 400px) {
   nav a {
     right: auto;
     padding-left: 3vw;

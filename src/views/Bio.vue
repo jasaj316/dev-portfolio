@@ -44,9 +44,10 @@
 .about {
   display: flex;
   flex-direction: column;
-  background: #1718217d;
-  border-radius: 0.1rem;
-  padding: 1vw;
+  background: #10111a;
+  background-image: linear-gradient(#0f111a 0%, #11121d 100%);
+  border-radius: 3px;
+  padding: 1vw 1.4vw 1vw 1.4vw;
   margin-bottom: 1rem;
 }
 
@@ -70,7 +71,7 @@
 /* Tiny screens */
 @media only screen and (max-width: 400px) {
   .about p {
-    max-width: 92vw;
+    max-width: 90vw;
   }
 }
 </style>
