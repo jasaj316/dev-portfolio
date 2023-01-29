@@ -1,66 +1,80 @@
 <script setup lang="ts">
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
+// vue components
 import Card from '@/components/Card.vue';
 import Modal from '@/components/Modal.vue';
-
-//import images
-import Automoblox from '@/assets/img/automoblox.jpg';
-import Flag from '@/assets/img/flag.jpg';
-import TypeAhead from '@/assets/img/typeAhead.jpg';
-import Pong from '@/assets/img/pong.jpg';
-
-// data used to create card instances
-const cardsList: { title: string, src: string, alt: string, link: string }[] = [
-  // src HAS to be unique
-  { title: "'Guess The Flag' Game with Map API", src: Flag, alt: "Click on a map to guess where a flag comes from", link: "" },
-  { title: "Pong vs AI in VanillaJS and Canvas", src: Pong, alt: "Pong made with html canvas and vanillaJS", link: "https://jasaj316.github.io/pong/pong.html" },
-  { title: "Dynamic Search Filter in VanillaJS", src: TypeAhead, alt: "List of cities and states, filtered using a search box", link: "" },
-  { title: "Bootstrap Site for Automoblox", src: Automoblox, alt: "A site that fully uses bootstrap classes + carousel", link: "" }
-];
+// script used to store card data
+import CardData from '@/assets/scripts/CardData'
 
 // modal state variables
-const state: { modalVis: string, title: string, src: string, alt: string, link: string } = reactive({
+const state: { modalVis: string, title: string, subtitle: string, src: string, alt: string, link: string, linkText: string } = reactive({
   modalVis: "hidden",
   title: "",
+  subtitle: "",
   src: "",
   alt: "",
-  link: ""
+  link: "",
+  linkText: ""
 });
 
+// Variable for storing inital screen width (modal hides scrollbar)
+let scrollBarWidth = 0;
+// Elements to widen when scrollbar goes away
+const header: HTMLElement = document.querySelector("#header-main") || document.body;
+const app: HTMLElement = document.querySelector("#app") || document.body;
+const footer: HTMLElement = document.querySelector("footer") || document.body;
+onMounted(() => {
+  setTimeout(() => {
+    scrollBarWidth = window.innerWidth - document.body.offsetWidth;
+    console.log(scrollBarWidth)
+    header.style.width = `${window.innerWidth - scrollBarWidth}px`;
+  }, 400)
+})
 
 // card img clicked - create modal of img
 function modalHandler(src: string = "") {
   // match clicked src property to one of the card objects
-  cardsList.forEach(card => {
+  CardData.forEach(card => {
     if (src == card.src) {
       state.title = card.title;
+      state.subtitle = card.subtitle;
       state.src = card.src;
       state.alt = card.alt;
       state.link = card.link;
+      state.linkText = card.linkText;
     }
   })
   // if modal is hidden
   if (state.modalVis == "hidden") { // if modal is off
+    // add right padding to body elements when scrollbar disappears
+    header.style.paddingRight = `${scrollBarWidth}px`;
+    app.style.paddingRight = `${scrollBarWidth}px`;
+    footer.style.paddingRight = `${scrollBarWidth}px`;
     // send "vis" as a class name
     state.modalVis = "vis";
   }
-  else if (src === "") {  // if clicking off the modal (nothing passed)
+  // if modal is visible
+  else if (src === "") {  // if exiting the modal (nothing passed)
+    // remove right padding when scrollbar appears
+    header.style.paddingRight = `0px`;
+    app.style.paddingRight = `0px`;
+    footer.style.paddingRight = `0px`;
     // send "hidden" as a class name
     state.modalVis = "hidden";
   }
 }
+
 // modal arrow clicked - load new image
 function arrowHandler(dir: string) {
   let currentIndex: number = 0;
   let initialIndex: number = 0;
   // get the current card's index, track it
-  cardsList.forEach((card, i) => {
+  CardData.forEach((card, i) => {
     if (card.src == state.src) {
       currentIndex = i;
       initialIndex = currentIndex;
     }
   })
-
 
   // if left and not out of index
   if (dir === "l") {
@@ -68,12 +82,12 @@ function arrowHandler(dir: string) {
       currentIndex = currentIndex - 1;
     }
     else {
-      currentIndex = cardsList.length - 1;
+      currentIndex = CardData.length - 1;
     }
   }
   // if right and not out of index
   else if (dir === "r") {
-    if (currentIndex < cardsList.length - 1) {
+    if (currentIndex < CardData.length - 1) {
       currentIndex = currentIndex + 1;
     }
     else {
@@ -82,10 +96,9 @@ function arrowHandler(dir: string) {
   }
   // set new state variables if index was changed
   if (currentIndex !== initialIndex) {
-    modalHandler(cardsList[currentIndex].src)
+    modalHandler(CardData[currentIndex].src)
   }
 }
-
 </script>
 
 
@@ -97,13 +110,13 @@ function arrowHandler(dir: string) {
     </div>
     <div class="portfolio">
       <article id="portfolio-items">
-        <Card v-for="card in cardsList" @imgClicked="(title) => modalHandler(title)" :="card" />
+        <Card v-for="card in CardData" @imgClicked="(title) => modalHandler(title)" :="card" />
       </article>
     </div>
-    <Modal @imgClicked="modalHandler" @leftClicked="(dir) =>arrowHandler(dir)" @rightClicked="(dir) =>arrowHandler(dir)"
-      :="state" />
+    <Modal @imgClicked="modalHandler" @btnClicked="(dir) => arrowHandler(dir)" :="state" />
   </main>
 </template>
+
 
 <style scoped>
 article {

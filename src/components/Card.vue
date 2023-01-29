@@ -18,6 +18,9 @@ const props = defineProps<{ title: string, src: string, alt: string }>();
 <style scoped>
 figure {
   -webkit-tap-highlight-color: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
   background-color: transparent;
   margin-inline-start: 0;
@@ -36,7 +39,8 @@ figure:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  margin-top: 1%;
+  width: 100%;
   background-color: #09091aef;
   position: relative;
   top: -3.2vw;
@@ -70,6 +74,7 @@ img {
     top: -5.2vw;
     height: 5vw;
     margin-bottom: -5.2vw;
+    width: 101%;
   }
 
   figcaption {

@@ -6,26 +6,23 @@
     </div>
     <article class="about">
       <p>
-        &nbsp;&nbsp;I grew up in Muskoka, ON, and after graduating high school,
-        I studied Game Development at Durham College. This allowed me to obtain a
-        Texture Artist position at Guru Studio in Toronto, to work on the television series 'Paw Patrol'.
+        &nbsp;&nbsp;I grew up in beautiful Muskoka, ON, and after high school, I achieved an Advanced Diploma with
+        Honours in 'Game Development' at Durham College. Quickly recruited as a Texture Artist at Guru Studio in
+        Toronto, I worked on the popular childrens' television series 'Paw Patrol'.
       </p>
       <p>
-        &nbsp;&nbsp;Working in a large team allowed me to hone my communication skills, helping me
-        collaborate, troubleshoot, and share solutions among team members.
-        Deadlines were often very tight,
-        which required me limit the amount of time spent on individual tasks in order to complete assignments on
-        schedule.
-        I left that field due to the fact that creating 3d Art requires very little
-        problem-solving, which I enjoy greatly.
+        &nbsp;&nbsp;Working in that large team environment allowed me to hone my communication skills, in order to
+        collaborate,troubleshoot, and share solutions among my team members.
+        Deadlines were often very tight, which required me to limit the amount of time spent on individual tasks to
+        complete assignments on schedule.
       </p>
       <p>
-        &nbsp;&nbsp;I've recently graduated from Georgian College's 'Interactive Media Design-Web' program, recieving
-        Honours.
-        The program covered client-side web technologies such as HTML, CSS, and Vanilla JS,
-        design skills such as UI, UX, and graphic design, and server-side technologies such as PHP,
-        relational database management using MySQL, and NoSQL MongoDB.
-        I've learned the Javascript frameworks Vue and React, as well as various small libraries.
+        &nbsp;&nbsp;In pursuit of my strong interest in web development, I left Guru Studio,
+        and have recently graduated with Honours from Georgian College's 'Interactive Media Design-Web' program.
+        This taught me client-side web technologies such as HTML, CSS, and Vanilla JS,
+        as well as the JavaScript frameworks Vue and React. The program also included design skills
+        such as UI, UX, and graphic design, back-end technologies such as PHP,
+        and relational database management using MySQL and MongoDB.
       </p>
       <p> My other passions (in no particular order) include:
         <br><br>
@@ -45,7 +42,7 @@
   display: flex;
   flex-direction: column;
   background: #10111a;
-  background-image: linear-gradient(#0f111a 0%, #11121d 100%);
+  background-image: linear-gradient(#0d0e1b 20%, #0e0f1b 100%);
   border-radius: 3px;
   padding: 1vw 1.4vw 1vw 1.4vw;
   margin-bottom: 1rem;

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeMount, watch, ref } from 'vue';
+import { onBeforeMount, onMounted, watch, ref } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import router from '@/router/index'
 // import images
@@ -16,6 +16,7 @@ onBeforeMount(() => {
     routesList.push({ path: route.path, name: String(route.name) });
   })
   routesListAfterFirst = routesList.slice(1);
+
 });
 
 // get current route when useRoute changes, change title to (title + | + current route)
@@ -88,11 +89,12 @@ function handleHover(e: any) {
   justify-content: flex-start;
   min-height: 100vh;
   font-size: 16px;
-  background-image: linear-gradient(#000 10%, #030614 20%, #09091a 100%);
+  background-image: linear-gradient(#01010c 0%, #06060f 10%, #080813 50%, #06060f 90%, #01010c 100%);
   color: #f0eee9;
   font-family: "Inter", Helvetica, Arial, sans-serif;
   letter-spacing: 0.002rem;
 }
+
 
 #app *::selection {
   background-color: #547cd188;
@@ -133,8 +135,7 @@ h3 {
   width: 100%;
   height: 125px;
   background-image: linear-gradient(#171820 0%, #1a1b24 100%);
-  background-image: url("./assets/img/bg.png"), linear-gradient(#171820 70%, #1a1b26 100%);
-  background-position: center;
+  background-image: url("./assets/img/bg.png"), linear-gradient(#070713 70%, #0a0a16 100%);
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
   flex-direction: row;
@@ -249,14 +250,13 @@ nav a:hover {
   cursor: pointer;
   color: #151515;
   background-color: #f0eee9;
-  font-weight: bolder;
 }
 
 /* Footer */
 footer {
   text-align: center;
   background: #16171f;
-  background-image: linear-gradient(#12131b 0%, #10111c 50%);
+  background-image: url("./assets/img/bg.png"), linear-gradient(#0a0a16 0%, #070713 81%);
 }
 
 footer p {
@@ -288,10 +288,15 @@ footer a img {
   vertical-align: middle;
 }
 
+body {
+  width: 100%;
+}
+
 /* Modal is on */
 body:has(main.vis) {
-  overflow: hidden;
+  overflow-y: hidden;
 }
+
 
 /* Main */
 main {
@@ -350,10 +355,6 @@ main p {
 
 /* Small screens */
 @media only screen and (max-width: 710px) {
-  body #app {
-    overflow-x: hidden !important;
-  }
-
   main {
     max-width: 100% !important;
     overflow-x: hidden !important;
