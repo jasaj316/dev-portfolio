@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, onMounted } from 'vue';
+import { reactive } from 'vue';
 // vue components
 import Card from '@/components/Card.vue';
 import Modal from '@/components/Modal.vue';
@@ -17,41 +17,21 @@ const state: { modalVis: string, title: string, subtitle: string, src: string, a
   linkText: ""
 });
 
-// variables pertaining to scrollbar width
-const scrollVars: { set: boolean, initialWidth: number, scrollBarWidth: number } = {
-  set: false,
-  initialWidth: 0,
-  scrollBarWidth: 0
-};
-// hiding, showing the scrollbar
-function blockScroll(hiding: boolean = true) {
-  if (!scrollVars.set) {
-    // get original size
-    scrollVars.scrollBarWidth = window.screen.width - document.body.offsetWidth;
-    scrollVars.initialWidth = window.screen.width - scrollVars.scrollBarWidth;
-    scrollVars.set = true; console.log(scrollVars);
-    window.addEventListener("resize", () => {
-      scrollVars.initialWidth = window.screen.width - scrollVars.scrollBarWidth
-    })
-  }
-  switch (hiding) {
-    case true:
-      // set body styles
-      document.body.style.overflowY = "hidden";
-      document.body.style.width = `${scrollVars.initialWidth}px`;
-      document.body.style.paddingRight = `${scrollVars.scrollBarWidth}px`;
-      return;
-    case false:
-      // re-set body styles
-      document.body.style.overflowY = "visible";
-      document.body.style.width = `${scrollVars.initialWidth}px`;
-      document.body.style.paddingRight = `0px`;
-      return;
-  }
-}
+// variables for getting scrollbar width (modal hides the scrollbar)
+let scrollBarUnknown: boolean = true;
+let scrollBarWidth: number = 0;
+// re-check if window is resized
+window.addEventListener("resize", () => {
+  scrollBarUnknown = true;
+})
 
 // card img clicked - create modal of img
 function modalHandler(src: string = "") {
+  // if the scrollbar width needs to be re-checked
+  if (scrollBarUnknown) {
+    scrollBarWidth = scrollBarWidth = window.innerWidth - document.body.clientWidth;
+    scrollBarUnknown = false;
+  }
   // match the clicked src property to one of the card objects
   CardData.forEach(card => {
     if (src == card.src) {
@@ -64,16 +44,18 @@ function modalHandler(src: string = "") {
     }
   })
   // if modal is hidden
-  if (state.modalVis == "hidden") { // if modal is off
-    // prevent scrolling when modal is on
-    blockScroll(true);
+  if (state.modalVis == "hidden") {
+    // hide the scrollbar and shift the body left
+    document.body.style.overflow = "hidden";
+    document.body.style.marginLeft = `-${scrollBarWidth / 2}px`
     // send "vis" as a class name
     state.modalVis = "vis";
   }
-  // if modal is visible
-  else if (src === "") {  // if exiting the modal (nothing passed)
-    // allow scrolling when modal is off
-    blockScroll(false);
+  // if function wasn't passed a card (modal already on)
+  else if (!src) {
+    // show the scrollbar and reset the body
+    document.body.style.marginLeft = "0"
+    document.body.style.overflow = "visible";
     // send "hidden" as a class name
     state.modalVis = "hidden";
   }

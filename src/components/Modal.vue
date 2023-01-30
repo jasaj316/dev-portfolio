@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 import ExternalLinkIcon from '@/assets/img/external-64.svg';
 const props = defineProps<{ modalVis: string, title: string, subtitle: string, src: string, alt: string, link: string, linkText: string }>();
 const arrowDirs: string[] = ["l", "r"]
@@ -46,8 +45,8 @@ const arrowDirs: string[] = ["l", "r"]
   -webkit-tap-highlight-color: transparent;
   background-image: radial-gradient(#04061196, #040611f4);
   position: fixed;
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   left: 0;
   top: 0;
   display: flex;
@@ -94,6 +93,7 @@ const arrowDirs: string[] = ["l", "r"]
 /* Buttons */
 button {
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
   font-size: 2rem;
   font-weight: 600;
   background-color: #040714e4;
