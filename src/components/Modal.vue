@@ -94,8 +94,7 @@ const arrowDirs: string[] = ["l", "r"]
 button {
   -webkit-tap-highlight-color: transparent;
   user-select: none;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 5vmin;
   background-color: #040714e4;
   border: solid transparent;
   color: #f0eee9;
@@ -103,7 +102,7 @@ button {
   margin: 0;
   text-decoration: none;
   height: 15vmin;
-  min-width: 10vmin;
+  min-width: 12vmin;
   border-radius: 3px;
   transition: border .15s;
 }
