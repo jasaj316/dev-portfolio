@@ -17,23 +17,9 @@ const state: { modalVis: string, title: string, subtitle: string, src: string, a
   linkText: ""
 });
 
-// Variable for storing inital screen width (modal hides scrollbar)
-let scrollBarWidth = 0;
-// Elements to widen when scrollbar goes away
-const header: HTMLElement = document.querySelector("#header-main") || document.body;
-const app: HTMLElement = document.querySelector("#app") || document.body;
-const footer: HTMLElement = document.querySelector("footer") || document.body;
-onMounted(() => {
-  setTimeout(() => {
-    scrollBarWidth = window.innerWidth - document.body.offsetWidth;
-    console.log(scrollBarWidth)
-    header.style.width = `${window.innerWidth - scrollBarWidth}px`;
-  }, 400)
-})
-
 // card img clicked - create modal of img
 function modalHandler(src: string = "") {
-  // match clicked src property to one of the card objects
+  // match the clicked src property to one of the card objects
   CardData.forEach(card => {
     if (src == card.src) {
       state.title = card.title;
@@ -46,19 +32,18 @@ function modalHandler(src: string = "") {
   })
   // if modal is hidden
   if (state.modalVis == "hidden") { // if modal is off
-    // add right padding to body elements when scrollbar disappears
-    header.style.paddingRight = `${scrollBarWidth}px`;
-    app.style.paddingRight = `${scrollBarWidth}px`;
-    footer.style.paddingRight = `${scrollBarWidth}px`;
+    // remove scrollbar, force width to stay small, add padding to the right
+    document.body.style.overflowY = "hidden";
+    document.body.style.width = `${window.innerWidth - (window.innerWidth - document.body.offsetWidth)}px`;
+    document.body.style.paddingRight = `${(window.innerWidth - document.body.offsetWidth)}px`;
     // send "vis" as a class name
     state.modalVis = "vis";
   }
   // if modal is visible
   else if (src === "") {  // if exiting the modal (nothing passed)
-    // remove right padding when scrollbar appears
-    header.style.paddingRight = `0px`;
-    app.style.paddingRight = `0px`;
-    footer.style.paddingRight = `0px`;
+    // show scrollbar, remove padding from the right 
+    document.body.style.overflowY = "visible";
+    document.body.style.paddingRight = `0px`;
     // send "hidden" as a class name
     state.modalVis = "hidden";
   }

@@ -41,14 +41,15 @@ const arrowDirs: string[] = ["l", "r"]
 }
 
 #modal-bg {
-  backdrop-filter: blur(0px);
+  backdrop-filter: blur(3px);
   transition: backdrop-filter 1s;
   -webkit-tap-highlight-color: transparent;
-  background-image: radial-gradient(#04061166, #040611ef);
+  background-image: radial-gradient(#04061196, #040611f4);
   position: fixed;
   width: 100%;
   height: 100%;
   left: 0;
+  top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -66,7 +67,7 @@ const arrowDirs: string[] = ["l", "r"]
   border-style: solid;
   border-width: 0 0 3px 0;
   border-image: linear-gradient(to right, transparent, #88899122 calc(20% - 10rem), #f1a500, #f1a500, #88899122 calc(80% + 10rem), transparent) 1;
-  background-color: #040714cf;
+  background-color: #040714df;
   width: 100%;
   height: 12vmin;
 }
@@ -95,33 +96,29 @@ button {
   -webkit-tap-highlight-color: transparent;
   font-size: 2rem;
   font-weight: 600;
-  background-color: #040714cf;
+  background-color: #040714df;
+  border: solid transparent;
   color: #f0eee9;
   cursor: pointer;
   margin: 0;
-  border: 0;
   text-decoration: none;
   height: 15vmin;
   min-width: 10vmin;
   border-radius: 3px;
-  transition: color, background-color .15s;
-}
-
-button:hover {
-  background-color: #f0eee9;
-  color: #040714df;
+  transition: border .15s;
 }
 
 #left-button {
-  border: solid #f0eee9;
   border-width: 3px 0 3px 3px;
 }
 
 #right-button {
-  border: solid #f0eee9;
   border-width: 3px 3px 3px 0;
 }
 
+button:hover {
+  border: solid #f1a500;
+}
 
 /* Text */
 

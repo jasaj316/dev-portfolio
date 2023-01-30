@@ -24,16 +24,16 @@ const cardData: { title: string, subtitle: string, src: string, alt: string, lin
     title: "See N' Say Storymaker",
     subtitle: "Create custom sentences! Based on the original See 'N Say Story Maker. Created for a school project.",
     src: StoryMaker,
-    alt: "A site that fully uses bootstrap classes + carousel",
+    alt: "Create custom sentances and speak them aloud.",
     link: "https://jasaj316.github.io/See-N-Say-Story-Maker/",
     linkText: "Click here for the demo!"
   }, {
     title: "Dynamic Search Filter in VanillaJS",
-    subtitle: "Pong vs AI in VanillaJS and Canvas",
+    subtitle: "A dynamically-refreshing list in VanillaJS. Results come from a JSON endpoint. Created for a school project.",
     src: TypeAhead,
     alt: "List of cities and states, filtered using a search box",
-    link: "",
-    linkText: ""
+    link: "https://jasaj316.github.io/type-ahead/",
+    linkText: "Click here for the demo!"
   }
 
 ];

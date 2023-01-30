@@ -26,12 +26,11 @@
       </p>
       <p> My other passions (in no particular order) include:
         <br><br>
-        -&nbsp;Cooking<br>
-        -&nbsp;Spicy food<br>
-        -&nbsp;Composing electronic music<br>
-        -&nbsp;Cross-country road trips<br>
-        -&nbsp;Cats<br>
-        -&nbsp;Typography
+        &#x2713;&nbsp;Cooking<br>
+        &#x2713;&nbsp;Spicy food<br>
+        &#x2713;&nbsp;Cross-country road trips<br>
+        &#x2713;&nbsp;Cats<br>
+        &#x2713;&nbsp;Typography
       </p>
       <p>Thank you for taking the time to review my biography. I hope to hear from you soon!</p>
     </article>

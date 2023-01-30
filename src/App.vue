@@ -83,6 +83,13 @@ function handleHover(e: any) {
 @import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Spartan:wght@600&display=swap');
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
 #app {
   display: flex;
   flex-direction: column;
@@ -130,12 +137,12 @@ h3 {
 /* Header */
 #header-main {
   user-select: none;
-  position: absolute;
+  position: relative;
   z-index: 1;
   width: 100%;
   height: 125px;
   background-image: linear-gradient(#171820 0%, #1a1b24 100%);
-  background-image: url("./assets/img/bg.png"), linear-gradient(#070713 70%, #0a0a16 100%);
+  background-image: url("./assets/img/bg.png"), linear-gradient(#060613 0%, #080718 70%, #0c0d1d 100%);
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
   flex-direction: row;
@@ -148,8 +155,7 @@ h3 {
 }
 
 #header-main a>div:nth-of-type(1) {
-  margin: 2.5vw;
-  margin-right: 1.5rem;
+  padding: 0 1.5rem 0 2.5vw;
 }
 
 #header-main a h2 {
@@ -180,14 +186,6 @@ h3 {
   width: calc(2vw + 70px);
   margin-top: 0.2rem;
   height: auto;
-}
-
-.logo:hover .title-text h1 {
-  color: #f7aa05;
-}
-
-.logo:hover .title-text h2 {
-  color: #f0eee9;
 }
 
 .logo {
@@ -256,7 +254,7 @@ nav a:hover {
 footer {
   text-align: center;
   background: #16171f;
-  background-image: url("./assets/img/bg.png"), linear-gradient(#0a0a16 0%, #070713 81%);
+  background-image: url("./assets/img/bg.png"), linear-gradient(#0c0d1d -5%, #080718 30%, #060613 100%);
 }
 
 footer p {
@@ -268,12 +266,12 @@ footer p {
 }
 
 footer p span {
-  color: #89d443;
+  color: #6ec51d;
 }
 
 footer a {
   text-decoration: underline;
-  color: #fab00c;
+  color: #f1a500;
   filter: sepia(0%) brightness(100%);
 
 }
@@ -292,12 +290,6 @@ body {
   width: 100%;
 }
 
-/* Modal is on */
-body:has(main.vis) {
-  overflow-y: hidden;
-}
-
-
 /* Main */
 main {
   margin: auto;
@@ -307,7 +299,7 @@ main {
 }
 
 main>*:first-child {
-  margin-top: 172px;
+  margin-top: 45px;
 }
 
 main>* {
@@ -322,15 +314,6 @@ main h3 {
 
 main p {
   font-size: 1.4rem;
-}
-
-/* touch screen remove hovers */
-@media (hover:none) {
-  nav a:hover {
-    color: unset;
-    background-color: unset;
-    font-weight: unset;
-  }
 }
 
 /* Media generals */
