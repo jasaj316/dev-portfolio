@@ -145,7 +145,7 @@ h3 {
   width: 100%;
   height: 125px;
   background-color: #080718;
-  background-image: url("./assets/img/bg.png"), linear-gradient(#060613 0%, #080718 70%, #0c0d1d 100%);
+  background-image: url("@/assets/img/bg.png"), linear-gradient(#060613 0%, #080718 70%, #0c0d1d 100%);
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
   flex-direction: row;
@@ -257,7 +257,7 @@ nav a:hover {
 footer {
   text-align: center;
   background: #080718;
-  background-image: url("./assets/img/bg.png"), linear-gradient(#0c0d1d -5%, #080718 30%, #060613 100%);
+  background-image: url("@/assets/img/bg.png"), linear-gradient(#0c0d1d -5%, #080718 30%, #060613 100%);
 }
 
 footer p {
