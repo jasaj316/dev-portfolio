@@ -99,7 +99,7 @@ body {
   justify-content: flex-start;
   min-height: 100vh;
   font-size: 16px;
-  background-image: linear-gradient(#01010c 0%, #06060f 10%, #080813 50%, #06060f 90%, #01010c 100%);
+  background-image: linear-gradient(#01010c 0%, #06060f 10%, #06060f 90%, #01010c 100%);
   color: #f0eee9;
   font-family: "Inter", Helvetica, Arial, sans-serif;
   letter-spacing: 0.002rem;
@@ -144,7 +144,7 @@ h3 {
   z-index: 1;
   width: 100%;
   height: 125px;
-  background-image: linear-gradient(#171820 0%, #1a1b24 100%);
+  background-color: #080718;
   background-image: url("./assets/img/bg.png"), linear-gradient(#060613 0%, #080718 70%, #0c0d1d 100%);
   border-radius: 0 0 0.1rem 0.1rem;
   display: flex;
@@ -256,7 +256,7 @@ nav a:hover {
 /* Footer */
 footer {
   text-align: center;
-  background: #16171f;
+  background: #080718;
   background-image: url("./assets/img/bg.png"), linear-gradient(#0c0d1d -5%, #080718 30%, #060613 100%);
 }
 

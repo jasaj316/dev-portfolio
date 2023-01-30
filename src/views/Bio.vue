@@ -42,7 +42,7 @@
   flex-direction: column;
   background: #10111a;
   background-image: linear-gradient(#0d0e1b 20%, #0e0f1b 100%);
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 1vw 1.4vw 1vw 1.4vw;
   margin-bottom: 1rem;
 }

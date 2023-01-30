@@ -26,7 +26,7 @@ figure {
   margin-inline-start: 0;
   margin-inline-end: 0;
   border: 3px solid #00000000;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   transition: border 0.15s;
   cursor: pointer;
 }
@@ -41,7 +41,8 @@ figure:hover {
   align-items: center;
   margin-top: 1%;
   width: 100%;
-  background-color: #09091aef;
+  background-color: #0a091a;
+  box-shadow: inset 0px -2px 30px #121229;
   position: relative;
   top: -3.2vw;
   height: 3vw;

@@ -89,7 +89,7 @@ input,
 textarea {
   outline: none;
   border: solid 3px #f0eee9;
-  border-radius: 3px;
+  border-radius: 5px;
   background-color: #f0eee9;
   transition: border 0.15s;
 }
@@ -117,7 +117,7 @@ textarea {
   font-weight: 600;
   text-align: center;
   padding: 0.2rem;
-  border-radius: 3px;
+  border-radius: 5px;
   border-style: solid;
   border-width: 3px;
   border-color: transparent;

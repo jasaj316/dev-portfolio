@@ -67,7 +67,7 @@ const arrowDirs: string[] = ["l", "r"]
   border-style: solid;
   border-width: 0 0 3px 0;
   border-image: linear-gradient(to right, transparent, #88899122 calc(20% - 10rem), #f1a500, #f1a500, #88899122 calc(80% + 10rem), transparent) 1;
-  background-color: #040714df;
+  background-color: #040714e4;
   width: 100%;
   height: 12vmin;
 }
@@ -96,7 +96,7 @@ button {
   -webkit-tap-highlight-color: transparent;
   font-size: 2rem;
   font-weight: 600;
-  background-color: #040714df;
+  background-color: #040714e4;
   border: solid transparent;
   color: #f0eee9;
   cursor: pointer;
