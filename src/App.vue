@@ -233,8 +233,8 @@ nav {
 nav a {
   text-align: center;
   font-size: calc(1.2rem + .6vw);
-  padding-left: calc(2vw + 2rem);
-  padding-right: calc(2vw + 2rem);
+  padding-left: calc(2.2vw + 1.6rem);
+  padding-right: calc(2.2vw + 1.6rem);
   border-left: 3px solid #f0eee9;
   padding-top: 22px;
   padding-bottom: 22px;
@@ -320,11 +320,11 @@ main p {
 }
 
 /* Media generals */
-@media only screen and (max-width: 890px) {
+@media only screen and (max-width: 840px) {
   nav a {
     right: auto;
-    padding-left: calc(9vw - 2.8rem);
-    padding-right: calc(9vw - 2.8rem);
+    padding-left: calc(19vw - 7.2rem);
+    padding-right: calc(19vw - 7.2rem);
   }
 
   .links {
@@ -349,6 +349,7 @@ main p {
   #header-main a>div:nth-of-type(1) {
     margin: calc(6vw - 0.2rem);
     margin-right: 0;
+    padding: 0;
   }
 
   .title-text {
@@ -384,25 +385,31 @@ main p {
     text-align: center;
     padding: 0rem 1rem;
   }
+
 }
 
 /* Tiny screens */
 @media only screen and (max-width: 400px) {
   nav a {
     right: auto;
-    padding-left: 3vw;
-    padding-right: 3vw;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border-width: 2px;
+  }
+
+  nav a:last-of-type {
+    border-width: 2px;
   }
 
   #header-main a>div:nth-of-type(1) {
-    margin: calc(6vw - 0.6rem);
+    margin: calc(6vw - 1rem);
     margin-right: 0;
   }
 
   .logo img {
     width: calc(3vw + 50px);
     margin-top: 0.2rem;
-    padding: 0.1rem;
+    padding-left: 0.5rem;
     height: auto;
   }
 

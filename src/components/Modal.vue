@@ -13,11 +13,11 @@ const arrowDirs: string[] = ["l", "r"]
     </div>
     <div class="center-bg">
       <button id="left-button" @click.stop="$emit('btnClicked', arrowDirs[0])">
-        &#x2B05;
+        &lt;-
       </button>
       <img class="modal-img" :src="props.src" :alt="props.alt" />
       <button id="right-button" @click.stop="$emit('btnClicked', arrowDirs[1])">
-        &#10145;
+        ->
       </button>
     </div>
     <aside class="subtitle-bg ">
