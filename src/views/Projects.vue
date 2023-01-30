@@ -17,6 +17,39 @@ const state: { modalVis: string, title: string, subtitle: string, src: string, a
   linkText: ""
 });
 
+// variables pertaining to scrollbar width
+const scrollVars: { set: boolean, initialWidth: number, scrollBarWidth: number } = {
+  set: false,
+  initialWidth: 0,
+  scrollBarWidth: 0
+};
+// hiding, showing the scrollbar
+function blockScroll(hiding: boolean = true) {
+  if (!scrollVars.set) {
+    // get original size
+    scrollVars.scrollBarWidth = window.screen.width - document.body.offsetWidth;
+    scrollVars.initialWidth = window.screen.width - scrollVars.scrollBarWidth;
+    scrollVars.set = true; console.log(scrollVars);
+    window.addEventListener("resize", () => {
+      scrollVars.initialWidth = window.screen.width - scrollVars.scrollBarWidth
+    })
+  }
+  switch (hiding) {
+    case true:
+      // set body styles
+      document.body.style.overflowY = "hidden";
+      document.body.style.width = `${scrollVars.initialWidth}px`;
+      document.body.style.paddingRight = `${scrollVars.scrollBarWidth}px`;
+      return;
+    case false:
+      // re-set body styles
+      document.body.style.overflowY = "visible";
+      document.body.style.width = `${scrollVars.initialWidth}px`;
+      document.body.style.paddingRight = `0px`;
+      return;
+  }
+}
+
 // card img clicked - create modal of img
 function modalHandler(src: string = "") {
   // match the clicked src property to one of the card objects
@@ -32,18 +65,15 @@ function modalHandler(src: string = "") {
   })
   // if modal is hidden
   if (state.modalVis == "hidden") { // if modal is off
-    // remove scrollbar, force width to stay small, add padding to the right
-    document.body.style.overflowY = "hidden";
-    document.body.style.width = `${window.innerWidth - (window.innerWidth - document.body.offsetWidth)}px`;
-    document.body.style.paddingRight = `${(window.innerWidth - document.body.offsetWidth)}px`;
+    // prevent scrolling when modal is on
+    blockScroll(true);
     // send "vis" as a class name
     state.modalVis = "vis";
   }
   // if modal is visible
   else if (src === "") {  // if exiting the modal (nothing passed)
-    // show scrollbar, remove padding from the right 
-    document.body.style.overflowY = "visible";
-    document.body.style.paddingRight = `0px`;
+    // allow scrolling when modal is off
+    blockScroll(false);
     // send "hidden" as a class name
     state.modalVis = "hidden";
   }

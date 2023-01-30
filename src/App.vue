@@ -90,17 +90,7 @@ body {
 }
 
 body {
-  position: relative;
-  max-width: 100%;
-  padding-right: 0;
   background-color: #06060f;
-}
-
-/* Modal visible */
-body:has(.vis) {
-  width: calc(100vw - calc(100vw - 100%));
-  padding-right: calc(100vw - 100%);
-  position: fixed;
 }
 
 #app {
