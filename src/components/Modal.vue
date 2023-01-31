@@ -43,10 +43,10 @@ const arrowDirs: string[] = ["l", "r"]
   backdrop-filter: blur(3px);
   transition: backdrop-filter 1s;
   -webkit-tap-highlight-color: transparent;
-  background-image: radial-gradient(#04061196, #040611f4);
+  background-image: radial-gradient(#04061176 60%, #040611f4);
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   left: 0;
   top: 0;
   display: flex;
