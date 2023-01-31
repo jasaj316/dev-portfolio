@@ -68,7 +68,7 @@ const arrowDirs: string[] = ["l", "r"]
   border-image: linear-gradient(to right, transparent, #88899122 calc(20% - 10rem), #f1a500, #f1a500, #88899122 calc(80% + 10rem), transparent) 1;
   background-color: #040714e4;
   width: 100%;
-  height: 16vmax;
+  height: 16vh;
 }
 
 .center-bg {
@@ -86,7 +86,7 @@ const arrowDirs: string[] = ["l", "r"]
 /* Img */
 
 .modal-img {
-  height: calc(78vh + -7rem);
+  height: calc(75vh + -2rem);
   width: auto;
 }
 
@@ -160,11 +160,24 @@ p {
   font-size: calc(1.3vmin + 0.4rem);
 }
 
-/* Small screens */
-@media only screen and (max-aspect-ratio: 70/100) {
+/* Tall screens */
+@media only screen and (max-aspect-ratio: 83/100) {
   .modal-img {
-    width: 95vmin;
+    width: 75vmin;
     height: auto;
+  }
+}
+
+/* Taller screens */
+@media only screen and (max-aspect-ratio: 65/100) {
+  .modal-img {
+    width: 100vmin;
+    height: auto;
+  }
+
+  .title-bg,
+  .subtitle-bg {
+    height: 15vmax;
   }
 
   p {
