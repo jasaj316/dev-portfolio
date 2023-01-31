@@ -86,7 +86,7 @@ const arrowDirs: string[] = ["l", "r"]
 /* Img */
 
 .modal-img {
-  height: calc(75vh + -2rem);
+  height: calc(75vh + -2.5rem);
   width: auto;
 }
 
@@ -158,6 +158,24 @@ p {
 
 .subtitle-bg p {
   font-size: calc(1.3vmin + 0.4rem);
+}
+
+/* short screens */
+@media only screen and (max-height:500px) {
+
+  .title-bg {
+    border-width: 0 0 calc(0.5vh + 1px) 0;
+    height: 26vh;
+  }
+
+  .subtitle-bg {
+    border-width: calc(0.5vh + 1px) 0 0 0;
+    height: 26vh;
+  }
+
+  p {
+    font-size: calc(4vmin + 4px);
+  }
 }
 
 /* Tall screens */
