@@ -85,8 +85,8 @@ const arrowDirs: string[] = ["l", "r"]
 
 .subtitle-bg {
   margin-bottom: auto;
-  max-width: 50%;
-  flex: 1.5;
+  max-width: 68vw;
+  flex: 1.4;
 }
 
 .center-bg {
@@ -99,7 +99,6 @@ const arrowDirs: string[] = ["l", "r"]
 
 
 /* Img */
-
 .modal-img {
   height: calc(80vh - 5rem);
   width: auto;
@@ -139,7 +138,7 @@ button:hover {
 /* Text */
 p {
   color: #f0eee9;
-  font-size: calc(5.4vmin - 0.3rem);
+  font-size: calc(3.5vmin + 0.1rem);
   text-align: center;
   margin-block-start: 2vw;
   margin-block-end: 0;
@@ -147,7 +146,7 @@ p {
 
 .subtitle-bg p {
   margin-block-start: 0;
-  font-size: calc(1.6vmin + 0.5rem);
+  font-size: calc(1.3vmin + 0.5rem);
 }
 
 p.link-text {
@@ -178,7 +177,7 @@ p.link-text img {
   }
 
   p {
-    font-size: calc(5.5vmin - 0.2rem);
+    font-size: calc(4.6vmin + 0.1rem);
   }
 
   .subtitle-bg p {
