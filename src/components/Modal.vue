@@ -86,7 +86,7 @@ const arrowDirs: string[] = ["l", "r"]
 /* Img */
 
 .modal-img {
-  height: calc(75% + -2.5rem);
+  height: calc(75vh + -2.5rem);
   width: auto;
 }
 
@@ -175,6 +175,10 @@ p {
 
   p {
     font-size: calc(4vmin + 4px);
+  }
+
+  .subtitle-bg p {
+    font-size: calc(1.3vmin + 0.4rem);
   }
 }
 
