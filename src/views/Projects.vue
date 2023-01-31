@@ -110,7 +110,7 @@ function arrowHandler(dir: string) {
         <Card v-for="card in CardData" @imgClicked="(title) => modalHandler(title)" :="card" />
       </article>
     </div>
-    <Modal @imgClicked="modalHandler" @btnClicked="(dir) => arrowHandler(dir)" :="state" />
+    <Modal @exitClicked="modalHandler" @btnClicked="(dir) => arrowHandler(dir)" :="state" />
   </main>
 </template>
 

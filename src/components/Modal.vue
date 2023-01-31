@@ -6,7 +6,8 @@ const arrowDirs: string[] = ["l", "r"]
 
 
 <template>
-  <div id="modal-bg" @click="$emit('imgClicked')" :class="props.modalVis">
+
+  <div id="modal-bg" :class="props.modalVis">
     <div class="title-bg">
       <p>{{ props.title }}</p>
     </div>
@@ -25,6 +26,7 @@ const arrowDirs: string[] = ["l", "r"]
         <p class="link-text">{{ props.linkText }}<img :src="ExternalLinkIcon" alt="Link to demo" /></p>
       </a>
     </aside>
+    <div class="exit-button" @click="$emit('exitClicked')">&#x2716;</div>
   </div>
 
 </template>
@@ -37,6 +39,21 @@ const arrowDirs: string[] = ["l", "r"]
 
 .vis {
   backdrop-filter: blur(0px);
+}
+
+.exit-button {
+  position: fixed;
+  cursor: pointer;
+  color: #f0eee9;
+  top: 4vh;
+  right: 4vw;
+  z-index: 2;
+  font-size: 10vmin;
+  padding: 1vmin 4vmin 1vmin 4vmin;
+}
+
+.exit-button:hover {
+  color: #f1a500;
 }
 
 #modal-bg {
@@ -52,7 +69,6 @@ const arrowDirs: string[] = ["l", "r"]
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   z-index: 1;
 }
 
@@ -61,13 +77,16 @@ const arrowDirs: string[] = ["l", "r"]
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   max-width: 90%;
+  margin-top: 0;
+  flex: 1;
 }
 
 .subtitle-bg {
   margin-bottom: auto;
-  max-width: 60%;
+  max-width: 50%;
+  flex: 1.5;
 }
 
 .center-bg {
@@ -82,7 +101,7 @@ const arrowDirs: string[] = ["l", "r"]
 /* Img */
 
 .modal-img {
-  height: 70vh;
+  height: calc(80vh - 5rem);
   width: auto;
   padding: 1rem 0 1rem 0;
 }
@@ -93,11 +112,9 @@ button {
   user-select: none;
   font-size: 5vmin;
   background-color: #040611e6;
-  box-shadow: inset 0px 0px 30px #121229;
   border: solid #f0eee9;
   color: #f0eee9;
   cursor: pointer;
-  margin: 1rem;
   text-decoration: none;
   height: 15vmin;
   min-width: calc(7vmin + 0.8rem);
@@ -105,13 +122,13 @@ button {
 }
 
 #left-button {
-  border-width: 3px 3px 3px 3px;
-  border-radius: 3px 3px 3px 3px;
+  border-width: 3px 0px 3px 3px;
+  border-radius: 0px 3px 3px 0px;
 }
 
 #right-button {
-  border-width: 3px 3px 3px 3px;
-  border-radius: 3px 3px 3px 3px;
+  border-width: 3px 3px 3px 0px;
+  border-radius: 3px 0px 0px 3px;
 }
 
 button:hover {
@@ -120,19 +137,18 @@ button:hover {
 }
 
 /* Text */
-
 p {
   color: #f0eee9;
-  font-size: 5rem;
+  font-size: calc(5.4vmin - 0.3rem);
   text-align: center;
-  margin-block-start: 0;
+  margin-block-start: 2vw;
   margin-block-end: 0;
 }
 
 .subtitle-bg p {
-  font-size: 3vmin;
+  margin-block-start: 0;
+  font-size: calc(1.6vmin + 0.5rem);
 }
-
 
 p.link-text {
   text-decoration: underline;
@@ -150,52 +166,46 @@ p.link-text img {
   margin: 0 0 0.25vmin 0.25vmin;
 }
 
-p {
-  font-size: calc(1.5vmin + 0.8rem);
-}
-
-.subtitle-bg p {
-  font-size: calc(1.3vmin + 0.4rem);
-}
-
 /* Tall screens */
-@media only screen and (max-aspect-ratio: 83/100) {
+@media only screen and (max-aspect-ratio: 70/100) {
   .modal-img {
-    width: 72vmin;
+    width: 90vw;
     height: auto;
   }
 
-  .title-bg {
-    margin-top: calc(29rem - 50vw);
+  .subtitle-bg {
+    max-width: 90%;
   }
 
   p {
-    font-size: calc(1.2vmin + 0.8rem);
+    font-size: calc(5.5vmin - 0.2rem);
   }
 
   .subtitle-bg p {
-    font-size: calc(1vmin + 0.8rem);
-  }
-}
-
-/* Taller screens */
-@media only screen and (max-aspect-ratio: 65/100) {
-  .modal-img {
-    width: 100vw;
-    height: auto;
-  }
-
-  .title-bg {
-    margin-top: calc(22rem - 50vw);
-  }
-
-  .subtitle-bg,
-  .subtitle-bg {
-    max-width: 85%;
+    font-size: calc(1.3vmin + 0.8rem);
   }
 
   button {
-    display: none;
+    /* Hidden button for L/R touch */
+    position: fixed;
+    height: 120vw;
+    width: 50vw;
+    color: transparent;
+    border: none;
+    background-color: transparent;
+  }
+
+  button:hover {
+    color: transparent;
+    border: none;
+  }
+
+  #left-button {
+    left: 0;
+  }
+
+  #right-button {
+    right: 0;
   }
 }
 </style>
