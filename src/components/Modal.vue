@@ -93,6 +93,7 @@ button {
   user-select: none;
   font-size: 5vmin;
   background-color: #040611e6;
+  box-shadow: inset 0px 0px 30px #121229;
   border: solid #f0eee9;
   color: #f0eee9;
   cursor: pointer;
