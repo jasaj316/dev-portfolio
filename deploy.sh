@@ -1,4 +1,4 @@
-rm -r dist
+rm -r dist -f
 # abort on errors
 set -e
 

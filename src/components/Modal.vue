@@ -152,11 +152,18 @@ p.link-text img {
   margin: 0 0 0.25vmin 0.25vmin;
 }
 
+p {
+  font-size: calc(1.5vmin + 0.8rem);
+}
+
+.subtitle-bg p {
+  font-size: calc(1.3vmin + 0.4rem);
+}
 
 /* Small screens */
-@media only screen and (max-aspect-ratio: 6/9) {
+@media only screen and (max-aspect-ratio: 70/100) {
   .modal-img {
-    width: 100vmin;
+    width: 95vmin;
     height: auto;
   }
 
