@@ -1,7 +1,22 @@
 <script setup lang="ts">
 import ExternalLinkIcon from '@/assets/img/external-64.svg';
-const props = defineProps<{ modalVis: string, title: string, subtitle: string, src: string, alt: string, link: string, linkText: string }>();
+import { onUpdated, onMounted } from 'vue';
+
+const props = defineProps<{
+  modalVis: string, title: string, subtitle: string, src: string, alt: string,
+  link: string, linkText: string, imgPos: { x: number, y: number }
+}>();
+
 const arrowDirs: string[] = ["l", "r"]
+
+let modalImg: HTMLImageElement;
+onMounted(() => {
+  modalImg = document.querySelector(".modal-img") as HTMLImageElement;
+})
+
+onUpdated(() => {
+  modalImg.style.transform = `translateX(${props.imgPos.x}px)`
+});
 </script>
 
 
@@ -15,12 +30,13 @@ const arrowDirs: string[] = ["l", "r"]
       <button id="left-button" @click.stop="$emit('btnClicked', arrowDirs[0])">
         &lt;-
       </button>
-      <img class="modal-img" :src="props.src" :alt="props.alt" />
+      <img class="modal-img" @touchmove.passive="$emit('imgTouched', $event, 1)"
+        @touchend="$emit('imgTouched', $event, 0)" :src="props.src" :alt="props.alt" />
       <button id="right-button" @click.stop="$emit('btnClicked', arrowDirs[1])">
         ->
       </button>
     </div>
-    <aside class="subtitle-bg ">
+    <aside class="subtitle-bg">
       <p>{{ props.subtitle }}</p>
       <a v-if="props.link" :href="props.link">
         <p class="link-text">{{ props.linkText }}<img :src="ExternalLinkIcon" alt="Link to demo" /></p>
@@ -186,13 +202,15 @@ p.link-text img {
   }
 
   button {
-    /* Hidden button for L/R touch */
+    /* Hidden button for L/R touch
     position: fixed;
     height: 120vw;
     width: 50vw;
     color: transparent;
     border: none;
     background-color: transparent;
+    box-shadow: none; */
+    display: none;
   }
 
   button:hover {

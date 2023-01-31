@@ -7,14 +7,18 @@ import Modal from '@/components/Modal.vue';
 import CardData from '@/assets/scripts/CardData'
 
 // modal state variables
-const state: { modalVis: string, title: string, subtitle: string, src: string, alt: string, link: string, linkText: string } = reactive({
+const state: {
+  modalVis: string, title: string, subtitle: string, src: string, alt: string,
+  link: string, linkText: string, imgPos: { x: number, y: number }
+} = reactive({
   modalVis: "hidden",
   title: "",
   subtitle: "",
   src: "",
   alt: "",
   link: "",
-  linkText: ""
+  linkText: "",
+  imgPos: { x: 0, y: 0 }
 });
 
 // variables for getting scrollbar width (modal hides the scrollbar)
@@ -72,7 +76,6 @@ function arrowHandler(dir: string) {
       initialIndex = currentIndex;
     }
   })
-
   // if left and not out of index
   if (dir === "l") {
     if (currentIndex > 0) {
@@ -96,6 +99,53 @@ function arrowHandler(dir: string) {
     modalHandler(CardData[currentIndex].src)
   }
 }
+
+// position of the touch when dragging image
+let firstTouch: { x: number, y: number } = { x: 0, y: 0 };
+let firstTouchTracked: boolean = false;
+let currentTouch: { x: number, y: number } = { x: 0, y: 0 };
+
+function touchHandler(e: TouchEvent, onOff: number) {
+  // if moving
+  if (onOff === 1) {
+    //track the first touch position
+    if (!firstTouchTracked) {
+      firstTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      firstTouchTracked = true;
+    }
+    currentTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    // send new position to modal
+    state.imgPos = { x: currentTouch.x - firstTouch.x, y: currentTouch.y - firstTouch.y }
+
+  }
+  // if touch ended
+  else {
+    //if touch was moved left more than width/3
+    if (state.imgPos.x > window.innerWidth / 3) {
+      //reset img position and send 'hidden' class
+      state.imgPos = { x: 0, y: 0 };
+      // allow firstTouch to be reset
+      firstTouchTracked = false;
+      // load img to the left
+      arrowHandler("l")
+    }
+    //if touch was moved right more than width/3
+    else if (state.imgPos.x < -window.innerWidth / 3) {
+      //reset img position and send 'hidden' class
+      state.imgPos = { x: 0, y: 0 };
+      // allow firstTouch to be reset
+      firstTouchTracked = false;
+      // load img to the right
+      arrowHandler("r")
+    }
+    //if touch was moved less than width/3
+    else {
+      state.imgPos = { x: 0, y: 0 };
+    }
+  }
+
+}
+
 </script>
 
 
@@ -110,7 +160,8 @@ function arrowHandler(dir: string) {
         <Card v-for="card in CardData" @imgClicked="(title) => modalHandler(title)" :="card" />
       </article>
     </div>
-    <Modal @exitClicked="modalHandler" @btnClicked="(dir) => arrowHandler(dir)" :="state" />
+    <Modal @imgTouched="(e, onOff) =>touchHandler(e, onOff)" @exitClicked="modalHandler"
+      @btnClicked="(dir) => arrowHandler(dir)" :="state" />
   </main>
 </template>
 
