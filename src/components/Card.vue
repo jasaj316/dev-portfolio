@@ -26,7 +26,7 @@ figure {
   margin-inline-start: 0;
   margin-inline-end: 0;
   border: 3px solid #00000000;
-  /* border-radius: 3px; */
+  border-radius: 3px;
   transition: border 0.15s;
   cursor: pointer;
 }
