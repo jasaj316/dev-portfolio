@@ -61,10 +61,10 @@ onUpdated(() => {
   position: fixed;
   cursor: pointer;
   color: #f0eee9;
-  top: 4vh;
-  right: 4vw;
+  top: 1vmax;
+  right: 1vmax;
   z-index: 2;
-  font-size: 10vmin;
+  font-size: calc(5.2vmin + 1.3rem);
   padding: 1vmin 4vmin 1vmin 4vmin;
 }
 
@@ -155,7 +155,7 @@ button:hover {
 /* Text */
 p {
   color: #f0eee9;
-  font-size: calc(3.5vmin + 0.1rem);
+  font-size: calc(3vmin + 0.4rem);
   text-align: center;
   margin-block-start: 2vw;
   margin-block-end: 0;
@@ -183,10 +183,20 @@ p.link-text img {
 }
 
 /* Tall screens */
-@media only screen and (max-aspect-ratio: 70/100) {
+@media only screen and (max-aspect-ratio: 71/100) {
+  .exit-button {
+    right: 1vmax;
+    z-index: 2;
+    padding: 1vmin 4vmin 1vmin 4vmin;
+  }
+
   .modal-img {
-    width: 90vw;
+    width: 85vw;
     height: auto;
+  }
+
+  .title-bg {
+    flex: 1.6;
   }
 
   .subtitle-bg {
@@ -198,18 +208,10 @@ p.link-text img {
   }
 
   .subtitle-bg p {
-    font-size: calc(1.3vmin + 0.8rem);
+    font-size: calc(1.3vmin + 0.7rem);
   }
 
   button {
-    /* Hidden button for L/R touch
-    position: fixed;
-    height: 120vw;
-    width: 50vw;
-    color: transparent;
-    border: none;
-    background-color: transparent;
-    box-shadow: none; */
     display: none;
   }
 
