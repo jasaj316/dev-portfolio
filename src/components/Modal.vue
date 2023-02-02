@@ -118,7 +118,7 @@ onUpdated(() => {
 .modal-img {
   height: calc(78vh - 4.2rem);
   width: auto;
-  padding: 1rem 0 1rem 0;
+  margin: 1rem 0 1rem 0;
 }
 
 /* Buttons */
@@ -135,6 +135,7 @@ button {
   height: 15vmin;
   min-width: calc(7vmin + 0.8rem);
   transition: border .15s, color .15s;
+  z-index: -1;
 }
 
 #left-button {
@@ -187,7 +188,6 @@ p.link-text img {
   .exit-button {
     top: 0.5vmax;
     font-size: calc(5.4vmin + 1.2rem);
-    z-index: 2;
   }
 
   .modal-img {

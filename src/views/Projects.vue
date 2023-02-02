@@ -101,17 +101,15 @@ function arrowHandler(dir: string) {
 }
 
 // position of the touch when dragging image
-let firstTouch: { x: number, y: number } = { x: 0, y: 0 };
-let firstTouchTracked: boolean = false;
+let firstTouch: { x: number, y: number, tracked: boolean } = { x: 0, y: 0, tracked: false };
 let currentTouch: { x: number, y: number } = { x: 0, y: 0 };
 
 function touchHandler(e: TouchEvent, onOff: number) {
   // if moving
   if (onOff === 1) {
     //track the first touch position
-    if (!firstTouchTracked) {
-      firstTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-      firstTouchTracked = true;
+    if (!firstTouch.tracked) {
+      firstTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY, tracked: true };
     }
     currentTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
     // send new position to modal
@@ -124,8 +122,6 @@ function touchHandler(e: TouchEvent, onOff: number) {
     if (state.imgPos.x > window.innerWidth / 3) {
       //reset img position and send 'hidden' class
       state.imgPos = { x: 0, y: 0 };
-      // allow firstTouch to be reset
-      firstTouchTracked = false;
       // load img to the left
       arrowHandler("l")
     }
@@ -133,8 +129,6 @@ function touchHandler(e: TouchEvent, onOff: number) {
     else if (state.imgPos.x < -window.innerWidth / 3) {
       //reset img position and send 'hidden' class
       state.imgPos = { x: 0, y: 0 };
-      // allow firstTouch to be reset
-      firstTouchTracked = false;
       // load img to the right
       arrowHandler("r")
     }
@@ -142,6 +136,8 @@ function touchHandler(e: TouchEvent, onOff: number) {
     else {
       state.imgPos = { x: 0, y: 0 };
     }
+    // allow firstTouch to be reset
+    firstTouch.tracked = false;
   }
 
 }
