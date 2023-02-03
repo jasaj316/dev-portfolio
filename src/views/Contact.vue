@@ -1,17 +1,24 @@
 <script setup lang="ts">
+/* --- IMPORTS --- */
+
 import { reactive, onMounted } from 'vue';
 
-// ##FORM
+/* --- IMPORTS --- */
+/* --- VARIABLES --- */
+
 // v-model variables for form
 let subject: string = "";
 let body: string = "";
 
 // reactive variables for button and personal data
-const State: { sendButton: string, email: string, emailClickable: string } = reactive({
+const state: { sendButton: string, email: string, emailClickable: string } = reactive({
   sendButton: "mailto:jasaj316@gmail.com?subject=&body=",
   email: "",
   emailClickable: ""
 });
+
+/* --- VARIABLES --- */
+/* --- FUNCTIONS --- */
 
 // when page loads
 onMounted(() => {
@@ -19,14 +26,14 @@ onMounted(() => {
   let localS = localStorage.getItem('email');
   // if so, display email, if not, show clickable box
   localS ?
-    (State.email = localS, State.emailClickable = "")
-    : (State.email = "░░░░░░░░░░░░░░", State.emailClickable = "clickable");
+    (state.email = localS, state.emailClickable = "")
+    : (state.email = "░░░░░░░░░░░░░░", state.emailClickable = "clickable");
 });
 
 // when user types
 function updateButton() {
   //update mailto with subject and body
-  State.sendButton = `mailto:jasaj316@gmail.com?subject=${subject}&body=${body}`;
+  state.sendButton = `mailto:jasaj316@gmail.com?subject=${subject}&body=${body}`;
 }
 
 // if email has been clicked
@@ -34,11 +41,11 @@ function showEmail() {
   // create local variable so store email
   localStorage.setItem('email', `jasaj316@gmail.com`);
   // change reactive variables to show email
-  State.email = `jasaj316@gmail.com`;
-  State.emailClickable = "";
+  state.email = `jasaj316@gmail.com`;
+  state.emailClickable = "";
 }
-// ##FORM
 
+/* --- FUNCTIONS --- */
 </script>
 
 
@@ -56,9 +63,9 @@ function showEmail() {
         <textarea name="body" id="body" rows="10" v-model="body" @input="updateButton"></textarea>
       </fieldset>
       <fieldset>
-        <a class="form-button" :href="State.sendButton">Send</a>
+        <a class="form-button" :href="state.sendButton">Send</a>
         <p>
-          <i>Or send an email to: &nbsp;<span @click="showEmail" :class="State.emailClickable">{{ State.email }}</span>
+          <i>Or send an email to: &nbsp;<span @click="showEmail" :class="state.emailClickable">{{ state.email }}</span>
           </i>
         </p>
       </fieldset>

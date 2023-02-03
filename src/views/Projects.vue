@@ -1,4 +1,6 @@
 <script setup lang="ts">
+/* --- IMPORTS --- */
+
 import { reactive } from 'vue';
 // vue components
 import Card from '@/components/Card.vue';
@@ -6,7 +8,10 @@ import Modal from '@/components/Modal.vue';
 // script used to store card data
 import CardData from '@/assets/scripts/CardData'
 
-// modal state variables
+/* --- IMPORTS --- */
+/* --- VARIABLES --- */
+
+// modal's state variables
 const state: {
   modalVis: string, title: string, subtitle: string, src: string, alt: string,
   link: string, linkText: string, imgPos: { x: number, anim: string }
@@ -29,7 +34,15 @@ window.addEventListener("resize", () => {
   scrollBarUnknown = true;
 })
 
-// card img clicked - create modal of img
+// touch delay variable - ALSO set modal.vue's .modal-img.anim delay to the same number.
+const animDelay: number = 125;
+// position of the initial touch when dragging image
+let firstTouch: { x: number, tracked: boolean } = { x: 0, tracked: false };
+
+/* --- VARIABLES --- */
+/* --- FUNCTIONS --- */
+
+// card img clicked -> create modal using img
 function modalHandler(src: string = "") {
   // if the scrollbar width needs to be re-checked
   if (scrollBarUnknown) {
@@ -65,7 +78,7 @@ function modalHandler(src: string = "") {
   }
 }
 
-// modal arrow clicked - load new image
+// load prev or next project
 function arrowHandler(dir: string) {
   let currentIndex: number = 0;
   let initialIndex: number = 0;
@@ -94,61 +107,68 @@ function arrowHandler(dir: string) {
       currentIndex = 0;
     }
   }
-  // set new state variables if index was changed
+  //if index was changed, set new state variables
   if (currentIndex !== initialIndex) {
-    setTimeout(() => { modalHandler(CardData[currentIndex].src) }, 500)
+    // if screen was touched
+    if (firstTouch.tracked) {
+      // delay for swipe animation
+      setTimeout(() => { modalHandler(CardData[currentIndex].src) }, animDelay)
+    }
+    else {
+      // if buttons are shown, it's instant
+      modalHandler(CardData[currentIndex].src);
+    }
   }
 }
 
-// position of the touch when dragging image
-let firstTouch: { x: number, tracked: boolean } = { x: 0, tracked: false };
-let currentTouch: { x: number, anim: string } = { x: 0, anim: "" };
-
-function touchHandler(e: TouchEvent, onOff: number) {
-  // if moving
-  if (onOff === 1) {
+// animating sliding image
+function modalTouchHandler(e: TouchEvent) {
+  // if touch is moving
+  if (e.type === "touchmove") {
     //track the first touch position
     if (!firstTouch.tracked) {
       firstTouch = { x: e.touches[0].clientX, tracked: true };
     }
-    currentTouch = { x: e.touches[0].clientX, anim: "" };
     // send new position to modal
-    state.imgPos = { x: currentTouch.x - firstTouch.x, anim: "" }
-
+    state.imgPos = { x: e.touches[0].clientX - firstTouch.x, anim: "" }
   }
   // if touch ended
   else {
     //if touch was moved left more than width/4
     if (state.imgPos.x > window.innerWidth / 4) {
-      //reset img position and send 'anim' class to animate
+      // move image off screen and send 'anim' class to animate
       state.imgPos = { x: window.innerWidth, anim: "anim" };
-      // load img to the left
+      // load previous img
       arrowHandler("l")
-      // place image on left after 0.25s and animate right after .5s
-      setTimeout(() => state.imgPos = { x: -window.innerWidth, anim: "" }, 250)
-      setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, 500)
+      // place image on left and animate to the right
+      setTimeout(() => {
+        state.imgPos = { x: -window.innerWidth, anim: "" };
+        setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, animDelay)
+      }, animDelay)
     }
     //if touch was moved right more than width/4
     else if (state.imgPos.x < -window.innerWidth / 4) {
-      //reset img position and send 'anim' class to animate
+      // move image off screen and send 'anim' class to animate
       state.imgPos = { x: -window.innerWidth, anim: "anim" };
-      // load img to the right
+      // load next img
       arrowHandler("r")
-      // place image on right after 0.25s and animate left after .5s
-      setTimeout(() => state.imgPos = { x: window.innerWidth, anim: "" }, 250)
-      setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, 500)
+      // place image on right and animate to the left
+      setTimeout(() => {
+        state.imgPos = { x: window.innerWidth, anim: "" };
+        setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, animDelay)
+      }, animDelay)
     }
-    //if touch was moved less than width/3
+    //if touch was moved less than width/4
     else {
-      //reset img position and send 'a' class to animate
+      //reset img position and send 'anim' class to animate
       state.imgPos = { x: 0, anim: "anim" };
     }
     // allow firstTouch to be reset
     firstTouch.tracked = false;
   }
-
 }
 
+/* --- FUNCTIONS --- */
 </script>
 
 
@@ -163,8 +183,8 @@ function touchHandler(e: TouchEvent, onOff: number) {
         <Card v-for="card in CardData" @imgClicked="(title) => modalHandler(title)" :="card" />
       </article>
     </div>
-    <Modal @imgTouched="(e, onOff) =>touchHandler(e, onOff)" @exitClicked="modalHandler"
-      @btnClicked="(dir) => arrowHandler(dir)" :="state" />
+    <Modal @imgTouched="(e) =>modalTouchHandler(e)" @exitClicked="modalHandler" @btnClicked="(dir) => arrowHandler(dir)"
+      :="state" />
   </main>
 </template>
 

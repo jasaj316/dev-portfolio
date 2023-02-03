@@ -31,7 +31,7 @@ onUpdated(() => {
         &lt;-
       </button>
       <img class="modal-img" :class="props.imgPos.anim" :src="props.src" :alt="props.alt"
-        @touchmove.passive="$emit('imgTouched', $event, 1)" @touchend="$emit('imgTouched', $event, 0)" />
+        @touchmove.passive="$emit('imgTouched', $event)" @touchend="$emit('imgTouched', $event)" />
       <button id="right-button" @click.stop="$emit('btnClicked', arrowDirs[1])">
         ->
       </button>
@@ -113,7 +113,6 @@ onUpdated(() => {
   justify-content: center;
 }
 
-
 /* Img */
 .modal-img {
   height: calc(78vh - 4.2rem);
@@ -122,7 +121,7 @@ onUpdated(() => {
 }
 
 .modal-img.anim {
-  transition: transform 0.25s;
+  transition: transform 0.125s;
 }
 
 /* Buttons */
@@ -187,6 +186,13 @@ p.link-text img {
   margin: 0 0 0.25vmin 0.25vmin;
 }
 
+/* User is mobile (can touch) */
+@media only screen and (hover:none) {
+  button {
+    display: none;
+  }
+}
+
 /* Tall screens */
 @media only screen and (max-aspect-ratio: 72/100) {
   .exit-button {
@@ -214,23 +220,6 @@ p.link-text img {
 
   .subtitle-bg p {
     font-size: calc(1.3vmin + 0.7rem);
-  }
-
-  button {
-    display: none;
-  }
-
-  button:hover {
-    color: transparent;
-    border: none;
-  }
-
-  #left-button {
-    left: 0;
-  }
-
-  #right-button {
-    right: 0;
   }
 }
 </style>

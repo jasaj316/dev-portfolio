@@ -1,22 +1,34 @@
 <script setup lang="ts">
+/* --- IMPORTS --- */
+
 import { onBeforeMount, onMounted, watch, ref } from 'vue';
 import { RouterLink, RouterView, useRoute } from 'vue-router'
 import router from '@/router/index'
-// import images
 import Icon from '@/assets/img/icon.png';
 import IconBorder from '@/assets/img/icon-border.png';
 import ExternalLinkIcon from '@/assets/img/external-64.svg';
 
-//##ROUTING
-// get list of routes, assign path, name to each object
-const routesList: { path: string, name: string }[] = [];
-let routesListAfterFirst: { path: string, name: string }[];
-onBeforeMount(() => {
-  router.getRoutes().forEach((route) => {
-    routesList.push({ path: route.path, name: String(route.name) });
-  })
-  routesListAfterFirst = routesList.slice(1);
+/* --- IMPORTS --- */
+/* --- VARIABLES --- */
 
+// ref for header icon src
+let iconRef = ref<string>(Icon);
+
+// arrays holding list of routes, routesListSliced
+const routesList: { path: string, name: string }[] = [];
+const routesListAfterFirst: { path: string, name: string }[] = [];
+
+/* --- VARIABLES --- */
+/* --- FUNCTIONS --- */
+
+// get list of routes, assign path + name to every object in both arrays
+onBeforeMount(() => {
+  router.getRoutes().forEach((route, i) => {
+    routesList.push({ path: route.path, name: route.name as string });
+    if (i > 0) {
+      routesListAfterFirst.push({ path: route.path, name: route.name as string });
+    }
+  })
 });
 
 // get current route when useRoute changes, change title to (title + | + current route)
@@ -24,14 +36,13 @@ let curRoute: { name: any } = useRoute();
 watch(curRoute, () => {
   document.title = document.title.split(" | ")[0] + " | " + curRoute.name.toUpperCase()[0] + curRoute.name.slice(1)
 });
-//##ROUTING
 
-// switching icon src on hover
-let iconRef = ref<string>(Icon);
-function handleHover(e: any) {
+// switch src on mouseenter, mouseleave
+function handleHover(e: MouseEvent) {
   iconRef.value = e.type === "mouseenter" ? IconBorder : Icon;
 }
 
+/* --- FUNCTIONS --- */
 </script>
 
 <template>
@@ -50,6 +61,7 @@ function handleHover(e: any) {
       </RouterLink>
       <nav>
         <RouterLink v-for="(route) in routesListAfterFirst" :to="route.path">
+          <!-- one uppercase leter, rest are lowercase  -->
           {{ route.name.toUpperCase()[0] + route.name.slice(1) }}
         </RouterLink>
       </nav>
