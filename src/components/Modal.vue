@@ -4,7 +4,7 @@ import { onUpdated, onMounted } from 'vue';
 
 const props = defineProps<{
   modalVis: string, title: string, subtitle: string, src: string, alt: string,
-  link: string, linkText: string, imgPos: { x: number, y: number }
+  link: string, linkText: string, imgPos: { x: number, anim: string }
 }>();
 
 const arrowDirs: string[] = ["l", "r"]
@@ -30,8 +30,8 @@ onUpdated(() => {
       <button id="left-button" @click.stop="$emit('btnClicked', arrowDirs[0])">
         &lt;-
       </button>
-      <img class="modal-img" @touchmove.passive="$emit('imgTouched', $event, 1)"
-        @touchend="$emit('imgTouched', $event, 0)" :src="props.src" :alt="props.alt" />
+      <img class="modal-img" :class="props.imgPos.anim" :src="props.src" :alt="props.alt"
+        @touchmove.passive="$emit('imgTouched', $event, 1)" @touchend="$emit('imgTouched', $event, 0)" />
       <button id="right-button" @click.stop="$emit('btnClicked', arrowDirs[1])">
         ->
       </button>
@@ -119,6 +119,10 @@ onUpdated(() => {
   height: calc(78vh - 4.2rem);
   width: auto;
   margin: 1rem 0 1rem 0;
+}
+
+.modal-img.anim {
+  transition: transform 0.25s;
 }
 
 /* Buttons */

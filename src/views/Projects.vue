@@ -9,7 +9,7 @@ import CardData from '@/assets/scripts/CardData'
 // modal state variables
 const state: {
   modalVis: string, title: string, subtitle: string, src: string, alt: string,
-  link: string, linkText: string, imgPos: { x: number, y: number }
+  link: string, linkText: string, imgPos: { x: number, anim: string }
 } = reactive({
   modalVis: "hidden",
   title: "",
@@ -18,7 +18,7 @@ const state: {
   alt: "",
   link: "",
   linkText: "",
-  imgPos: { x: 0, y: 0 }
+  imgPos: { x: 0, anim: "" }
 });
 
 // variables for getting scrollbar width (modal hides the scrollbar)
@@ -96,45 +96,52 @@ function arrowHandler(dir: string) {
   }
   // set new state variables if index was changed
   if (currentIndex !== initialIndex) {
-    modalHandler(CardData[currentIndex].src)
+    setTimeout(() => { modalHandler(CardData[currentIndex].src) }, 500)
   }
 }
 
 // position of the touch when dragging image
-let firstTouch: { x: number, y: number, tracked: boolean } = { x: 0, y: 0, tracked: false };
-let currentTouch: { x: number, y: number } = { x: 0, y: 0 };
+let firstTouch: { x: number, tracked: boolean } = { x: 0, tracked: false };
+let currentTouch: { x: number, anim: string } = { x: 0, anim: "" };
 
 function touchHandler(e: TouchEvent, onOff: number) {
   // if moving
   if (onOff === 1) {
     //track the first touch position
     if (!firstTouch.tracked) {
-      firstTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY, tracked: true };
+      firstTouch = { x: e.touches[0].clientX, tracked: true };
     }
-    currentTouch = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    currentTouch = { x: e.touches[0].clientX, anim: "" };
     // send new position to modal
-    state.imgPos = { x: currentTouch.x - firstTouch.x, y: currentTouch.y - firstTouch.y }
+    state.imgPos = { x: currentTouch.x - firstTouch.x, anim: "" }
 
   }
   // if touch ended
   else {
-    //if touch was moved left more than width/3
-    if (state.imgPos.x > window.innerWidth / 3) {
-      //reset img position and send 'hidden' class
-      state.imgPos = { x: 0, y: 0 };
+    //if touch was moved left more than width/4
+    if (state.imgPos.x > window.innerWidth / 4) {
+      //reset img position and send 'anim' class to animate
+      state.imgPos = { x: window.innerWidth, anim: "anim" };
       // load img to the left
       arrowHandler("l")
+      // place image on left after 0.25s and animate right after .5s
+      setTimeout(() => state.imgPos = { x: -window.innerWidth, anim: "" }, 250)
+      setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, 500)
     }
-    //if touch was moved right more than width/3
-    else if (state.imgPos.x < -window.innerWidth / 3) {
-      //reset img position and send 'hidden' class
-      state.imgPos = { x: 0, y: 0 };
+    //if touch was moved right more than width/4
+    else if (state.imgPos.x < -window.innerWidth / 4) {
+      //reset img position and send 'anim' class to animate
+      state.imgPos = { x: -window.innerWidth, anim: "anim" };
       // load img to the right
       arrowHandler("r")
+      // place image on right after 0.25s and animate left after .5s
+      setTimeout(() => state.imgPos = { x: window.innerWidth, anim: "" }, 250)
+      setTimeout(() => state.imgPos = { x: 0, anim: "anim" }, 500)
     }
     //if touch was moved less than width/3
     else {
-      state.imgPos = { x: 0, y: 0 };
+      //reset img position and send 'a' class to animate
+      state.imgPos = { x: 0, anim: "anim" };
     }
     // allow firstTouch to be reset
     firstTouch.tracked = false;
