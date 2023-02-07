@@ -65,8 +65,8 @@ function modalHandler(src: string = "") {
     // hide the scrollbar and shift the body left
     document.body.style.overflow = "hidden";
     document.body.style.marginLeft = `-${scrollBarWidth / 2}px`
-    // send "vis" as a class name
-    state.modalVis = "vis";
+    // remove hidden class
+    state.modalVis = "";
   }
   // if function wasn't passed a card (modal already on)
   else if (!src) {
@@ -123,7 +123,7 @@ function arrowHandler(dir: string) {
 
 // animating sliding image
 function touchDragHandler(e: TouchEvent | DragEvent) {
-  // same media query from Modal.vue
+  // If buttons aren't visible. Same media queries from Modal.vue that hide buttons
   if (window.matchMedia("only screen and (max-aspect-ratio: 72/100)\,only screen and (hover:none)").matches) {
     // if touch/drag is moving
     if (e.type === "touchmove" || e.type === "dragover") {

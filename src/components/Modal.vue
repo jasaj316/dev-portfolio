@@ -43,8 +43,8 @@ onUpdated(() => {
         <p class="link-text">{{ props.linkText }}<img :src="ExternalLinkIcon" alt="Link to demo" /></p>
       </a>
     </aside>
-    <div class="exit-button" @click="$emit('exitClicked')">&#x2716;</div>
   </div>
+  <div class="exit-button" :class="props.modalVis" @click="$emit('exitClicked')">&#x2716;</div>
 
 </template>
 
@@ -54,17 +54,13 @@ onUpdated(() => {
   display: none !important;
 }
 
-.vis {
-  backdrop-filter: blur(0px);
-}
-
 .exit-button {
   position: fixed;
   cursor: pointer;
   color: #f0eee9;
   top: 1vmax;
   right: 1vmax;
-  z-index: 2;
+  z-index: 1;
   font-size: calc(5.3vmin + 1.1rem);
   padding: 1vmin 4vmin 1vmin 4vmin;
 }
@@ -140,7 +136,6 @@ button {
   height: 15vmin;
   min-width: calc(7vmin + 0.8rem);
   transition: border .15s, color .15s;
-  z-index: -1;
 }
 
 #left-button {
@@ -188,9 +183,15 @@ p.link-text img {
   margin: 0 0 0.25vmin 0.25vmin;
 }
 
-/* Tall screens OR no cursor */
-@media only screen and (max-aspect-ratio: 72/100),
-only screen and (hover:none) {
+/* No cursor */
+@media only screen and (hover:none) {
+  button {
+    display: none;
+  }
+}
+
+/* Tall screens */
+@media only screen and (max-aspect-ratio: 72/100) {
   button {
     display: none;
   }
