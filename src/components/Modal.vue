@@ -31,7 +31,8 @@ onUpdated(() => {
         &lt;-
       </button>
       <img class="modal-img" :class="props.imgPos.anim" :src="props.src" :alt="props.alt"
-        @touchmove.passive="$emit('imgTouched', $event)" @touchend="$emit('imgTouched', $event)" />
+        @touchmove.passive="$emit('imgTouched', $event)" @touchend="$emit('imgTouched', $event)"
+        @dragover.passive="$emit('imgDragged', $event)" @dragend="$emit('imgDragged', $event)" />
       <button id="right-button" @click.stop="$emit('btnClicked', arrowDirs[1])">
         ->
       </button>
@@ -121,6 +122,7 @@ onUpdated(() => {
 }
 
 .modal-img.anim {
+  /* set to the same value as animDelay in Projects.vue */
   transition: transform 0.125s;
 }
 
@@ -186,15 +188,13 @@ p.link-text img {
   margin: 0 0 0.25vmin 0.25vmin;
 }
 
-/* User is mobile (can touch) */
-@media only screen and (hover:none) {
+/* Tall screens OR no cursor */
+@media only screen and (max-aspect-ratio: 72/100),
+only screen and (hover:none) {
   button {
     display: none;
   }
-}
 
-/* Tall screens */
-@media only screen and (max-aspect-ratio: 72/100) {
   .exit-button {
     top: 0.5vmax;
     font-size: calc(5.4vmin + 1.2rem);

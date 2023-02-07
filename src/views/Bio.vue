@@ -12,7 +12,7 @@
       </p>
       <p>
         &nbsp;&nbsp;Working in that large team environment allowed me to hone my communication skills, in order to
-        collaborate,troubleshoot, and share solutions among my team members.
+        collaborate, troubleshoot, and share solutions among my team members.
         Deadlines were often very tight, which required me to limit the amount of time spent on individual tasks to
         complete assignments on schedule.
       </p>
