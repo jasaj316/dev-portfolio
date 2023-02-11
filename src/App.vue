@@ -80,7 +80,7 @@ function handleHover(e: MouseEvent) {
   <footer>
     <p>
       Site Created by Justin Smith using <span>Vue</span>. Hosted on
-      <a href="https://github.com/jasaj316/dev-portfolio">
+      <a href="https://github.com/jasaj316/web-portfolio">
         Github Pages
         <img :src="ExternalLinkIcon" alt="Link to github pages" />
       </a>
