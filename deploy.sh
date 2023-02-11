@@ -12,7 +12,7 @@ cd dist
 echo > .nojekyll
 
 git init
-git remote add origin https://github.com/jasaj316/dev-portfolio.git
+git remote add origin https://github.com/jasaj316/web-portfolio.git
 git checkout -b gh-pages
 git add -A
 git commit -m 'deploy'

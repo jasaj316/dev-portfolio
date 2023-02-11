@@ -17,7 +17,7 @@
         complete assignments on schedule.
       </p>
       <p>
-        &nbsp;&nbsp;In pursuit of my strong interest in web development, I left Guru Studio,
+        &nbsp;&nbsp;In pursuit of my interest in web development, I left Guru Studio,
         and have recently graduated with Honours from Georgian College's 'Interactive Media Design-Web' program.
         This taught me client-side web technologies such as HTML, CSS, and Vanilla JS,
         as well as the JavaScript frameworks Vue and React. The program also included design skills
