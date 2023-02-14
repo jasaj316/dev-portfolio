@@ -70,7 +70,7 @@ function handleHover(e: MouseEvent) {
         <a href="https://github.com/jasaj316/">
           <img id="github-button" src="@/assets/img/github-brands.svg" alt="Github">
         </a>
-        <a href="https://www.linkedin.com/in/justin-a-smith-177b30ab/">
+        <a href="https://www.linkedin.com/in/justin-smith-177b30ab/">
           <img id="linkedin-button" src="@/assets/img/linkedin-in-brands.svg" alt="LinkedIn">
         </a>
       </div>
